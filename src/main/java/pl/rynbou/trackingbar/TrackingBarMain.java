@@ -6,7 +6,7 @@ public class TrackingBarMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        getServer().getLogger().info("Hello, World!");
     }
 
     @Override
