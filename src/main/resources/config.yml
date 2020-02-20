@@ -1,4 +1,5 @@
 bossbar-format: '%player%, %distance%'
+#testing
 tracker-range: 0
 tracker-item:
   type: 'COMPASS'
