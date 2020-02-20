@@ -1,4 +1,4 @@
-package pl.rynbou.TrackingBar;
+package pl.rynbou.trackingbar;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

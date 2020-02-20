@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.rynbou</groupId>
-    <artifactId>TrackingBar</artifactId>
+    <artifactId>trackingbar</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
