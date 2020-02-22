@@ -5,7 +5,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import pl.rynbou.trackingbar.TrackingBarMain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Settings {
 
@@ -15,7 +17,7 @@ public class Settings {
     private String bossBarFormatNoPlayersFound;
     private int trackerRange;
     private DimensionListType dimensionListType;
-    private List<World> dimensionList;
+    private Set<World> dimensionList = new HashSet<>();
     private int trackerRefreshRate;
     private ItemStack trackerItem;
     private boolean craftable;
@@ -29,6 +31,14 @@ public class Settings {
     public Settings(TrackingBarMain plugin) {
         this.plugin = plugin;
     }
+
+//    public boolean loadConfig(boolean reload){
+//        if (reload) {
+//            dimensionList = new HashSet<>();
+//        }
+//
+//        return true;
+//    }
 
     public String getBossBarFormat() {
         return bossBarFormat;
@@ -46,7 +56,7 @@ public class Settings {
         return dimensionListType;
     }
 
-    public List<World> getDimensionList() {
+    public Set<World> getDimensionList() {
         return dimensionList;
     }
 
