@@ -29,5 +29,51 @@ public class Settings {
         this.plugin = plugin;
     }
 
+    public String getBossBarFormat() {
+        return bossBarFormat;
+    }
 
+    public int getTrackerRange() {
+        return trackerRange;
+    }
+
+    public DimensionListType getDimensionListType() {
+        return dimensionListType;
+    }
+
+    public List<World> getDimensionList() {
+        return dimensionList;
+    }
+
+    public int getTrackerRefreshRate() {
+        return trackerRefreshRate;
+    }
+
+    public ItemStack getTrackerItem() {
+        return trackerItem;
+    }
+
+    public boolean isCraftable() {
+        return craftable;
+    }
+
+    public ShapedRecipe getRecipe() {
+        return recipe;
+    }
+
+    public String getCycleMessage() {
+        return cycleMessage;
+    }
+
+    public String getToggleOnMessage() {
+        return toggleOnMessage;
+    }
+
+    public String getToggleOffMessage() {
+        return toggleOffMessage;
+    }
+
+    public String getBlacklistedDimensionMessage() {
+        return blacklistedDimensionMessage;
+    }
 }
