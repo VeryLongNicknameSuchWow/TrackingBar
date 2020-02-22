@@ -23,9 +23,11 @@ public class PlayerMoveListener implements Listener {
         User user = plugin.getTracker().getUser(player);
 
         Player tracking = user.getTracking();
-        int distance = (int) plugin.getTracker().distanceBetween(player, tracking);
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                new TextComponent("Tracking: " + tracking.getDisplayName() + " " + distance));
+        if (tracking != null) {
+            int distance = (int) plugin.getTracker().distanceBetween(player, tracking);
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    new TextComponent("Tracking: " + tracking.getDisplayName() + " " + distance));
+        }
 
         user.getTrackedBy().forEach(trackedBy -> {
             int dist = (int) plugin.getTracker().distanceBetween(player, trackedBy);
