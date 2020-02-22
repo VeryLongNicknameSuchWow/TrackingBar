@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import pl.rynbou.trackingbar.TrackingBarMain;
+import pl.rynbou.trackingbar.user.User;
 
 public class PlayerMoveListener implements Listener {
 
@@ -19,16 +20,17 @@ public class PlayerMoveListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
+        User user = plugin.getTracker().getUser(player);
 
-        if (plugin.getTracker().getTrackerMap().containsKey(event.getPlayer())) {
-            Player target = plugin.getTracker().getTrackerMap().get(player);
-            int distance = (int) plugin.getTracker().distanceBetween(player, target);
-            event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new TextComponent("Tracking: " + target.getDisplayName() + " " + distance));
-        }
+        Player tracking = user.getTracking();
+        int distance = (int) plugin.getTracker().distanceBetween(player, tracking);
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                new TextComponent("Tracking: " + tracking.getDisplayName() + " " + distance));
 
-        if (plugin.getTracker().getTrackerMap().containsValue(event.getPlayer())) {
-
-        }
+        user.getTrackedBy().forEach(trackedBy -> {
+            int dist = (int) plugin.getTracker().distanceBetween(player, trackedBy);
+            trackedBy.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    new TextComponent("Tracking: " + trackedBy.getDisplayName() + " " + dist));
+        });
     }
 }

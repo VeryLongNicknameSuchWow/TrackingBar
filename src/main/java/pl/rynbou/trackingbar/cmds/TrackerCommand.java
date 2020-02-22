@@ -1,5 +1,6 @@
 package pl.rynbou.trackingbar.cmds;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,8 +22,12 @@ public class TrackerCommand implements CommandExecutor {
             return true;
         }
 
+        if (args.length != 1) {
+            sender.sendMessage("Correct usage: /tracker <name>");
+        }
+
         Player player = (Player) sender;
-        plugin.getTracker().startTracker(player);
+        plugin.getTracker().startTracker(player, Bukkit.getPlayer(args[0]));
         return true;
     }
 }

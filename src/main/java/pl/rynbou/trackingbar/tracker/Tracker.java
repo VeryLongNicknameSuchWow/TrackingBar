@@ -2,29 +2,36 @@ package pl.rynbou.trackingbar.tracker;
 
 import org.bukkit.entity.Player;
 import pl.rynbou.trackingbar.TrackingBarMain;
+import pl.rynbou.trackingbar.user.User;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Tracker {
 
     private TrackingBarMain plugin;
 
-    private Map<Player, Player> trackerMap = new HashMap<>();
+    private Map<Player, User> users = new HashMap<>();
 
     public Tracker(TrackingBarMain plugin) {
         this.plugin = plugin;
     }
 
-    public void startTracker(Player player) {
-        List<Player> closestPlayers = closestPlayers(player);
-        if (closestPlayers.size() > 0)
-            trackerMap.put(player, closestPlayers(player).get(0));
-        else
-            trackerMap.put(player, null);
+    public void startTracker(Player player, Player tracking) {
+        User user = getUser(player);
+        User trackingUser = getUser(tracking);
+
+        user.setTracking(tracking);
+        trackingUser.getTrackedBy().add(player);
     }
+
+//    public void startTracker(Player player) {
+//        List<Player> closestPlayers = closestPlayers(player);
+//        if (closestPlayers.size() > 0)
+//            trackerMap.put(player, closestPlayers(player).get(0));
+//        else
+//            trackerMap.put(player, null);
+//    }
 
     public List<Player> closestPlayers(Player player) {
         Map<Player, Double> map = new HashMap<>();
@@ -47,7 +54,17 @@ public class Tracker {
         return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaZ, 2));
     }
 
-    public Map<Player, Player> getTrackerMap() {
-        return trackerMap;
+    public Collection<User> getUsers() {
+        return users.values();
     }
+
+    public User getUser(Player player) {
+        User user = users.get(player);
+        if (user == null) {
+            user = new User(player);
+            users.put(player, user);
+        }
+        return user;
+    }
+
 }
