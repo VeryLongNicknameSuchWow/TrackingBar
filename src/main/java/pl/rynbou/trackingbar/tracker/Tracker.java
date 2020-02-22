@@ -19,7 +19,11 @@ public class Tracker {
     }
 
     public void startTracker(Player player) {
-        trackerMap.put(player, closestPlayers(player).get(0));
+        List<Player> closestPlayers = closestPlayers(player);
+        if (closestPlayers.size() > 0)
+            trackerMap.put(player, closestPlayers(player).get(0));
+        else
+            trackerMap.put(player, null);
     }
 
     public List<Player> closestPlayers(Player player) {
