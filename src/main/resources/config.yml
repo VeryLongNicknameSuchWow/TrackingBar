@@ -13,12 +13,14 @@ tracker-item:
   type: COMPASS
   name: 'PlayerTracker'
   lore:
-    - 'UwU OwO'
-    - 'What is this?'
-  enchanted: true
+    - 'right click to cycle players'
+    - 'left click to cycle back'
+    - 'right click with shift to toggle'
+  enchants:
+    - 'Sharpness:5'
   craftable: true
   recipe:
-    recipe:
+    shape:
       - 'AAA'
       - 'ABA'
       - 'AAA'
@@ -28,3 +30,6 @@ tracker-item:
 
 messages:
   cycle: 'Now tracking %player%'
+  toggle-on: 'You are now tracking %play%'
+  toggle-off: 'You are no longer tracking anyone'
+  blacklisted-world: "You can't use it here"

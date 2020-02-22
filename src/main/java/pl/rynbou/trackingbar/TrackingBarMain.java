@@ -6,7 +6,6 @@ public class TrackingBarMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
     }
 
     @Override
