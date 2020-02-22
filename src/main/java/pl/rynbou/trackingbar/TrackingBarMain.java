@@ -3,6 +3,7 @@ package pl.rynbou.trackingbar;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.rynbou.trackingbar.cmds.TrackerCommand;
 import pl.rynbou.trackingbar.settings.Settings;
+import pl.rynbou.trackingbar.tracker.PlayerMoveListener;
 import pl.rynbou.trackingbar.tracker.Tracker;
 
 public class TrackingBarMain extends JavaPlugin {
@@ -17,6 +18,7 @@ public class TrackingBarMain extends JavaPlugin {
         this.tracker = new Tracker(this);
 
         getCommand("tracker").setExecutor(new TrackerCommand(this));
+        getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
     }
 
     @Override

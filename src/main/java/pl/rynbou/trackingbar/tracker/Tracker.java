@@ -31,8 +31,9 @@ public class Tracker {
 
         for (Player p : player.getWorld().getPlayers()) {
             double distance = distanceBetween(player, p);
-            if (distance < plugin.getSettings().getTrackerRange())
-                map.put(p, distance);
+            //TODO fix range check
+//            if (distance < plugin.getSettings().getTrackerRange())
+            map.put(p, distance);
         }
 
         return map.entrySet().stream().sorted(Map.Entry.comparingByValue()).map(Map.Entry::getKey).collect(Collectors.toList());
@@ -43,5 +44,9 @@ public class Tracker {
         double deltaZ = p1.getLocation().getZ() - p2.getLocation().getZ();
 
         return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaZ, 2));
+    }
+
+    public Map<Player, Player> getTrackerMap() {
+        return trackerMap;
     }
 }
