@@ -30,6 +30,7 @@ public class Tracker {
         Map<Player, Double> map = new HashMap<>();
 
         for (Player p : player.getWorld().getPlayers()) {
+            if (p == player) continue;
             double distance = distanceBetween(player, p);
             //TODO fix range check
 //            if (distance < plugin.getSettings().getTrackerRange())
