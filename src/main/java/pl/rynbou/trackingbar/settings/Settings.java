@@ -12,6 +12,7 @@ public class Settings {
     private TrackingBarMain plugin;
 
     private String bossBarFormat;
+    private String bossBarFormatNoPlayersFound;
     private int trackerRange;
     private DimensionListType dimensionListType;
     private List<World> dimensionList;
@@ -31,6 +32,10 @@ public class Settings {
 
     public String getBossBarFormat() {
         return bossBarFormat;
+    }
+
+    public String getBossBarFormatNoPlayersFound() {
+        return bossBarFormatNoPlayersFound;
     }
 
     public int getTrackerRange() {

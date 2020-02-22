@@ -1,4 +1,5 @@
 bossbar-format: '%player%, %distance%'
+bossbar-format-no-players-found: 'No players found'
 tracker-range: 0
 
 dimension-list-type: WHITELIST # BLACKLIST, OFF
@@ -32,4 +33,4 @@ messages:
   cycle: 'Now tracking %player%'
   toggle-on: 'You are now tracking %play%'
   toggle-off: 'You are no longer tracking anyone'
-  blacklisted-dimension: "You can't use it here"
+  blacklisted-dimension: 'You cannot use it here'
