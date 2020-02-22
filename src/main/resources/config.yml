@@ -1,8 +1,16 @@
 bossbar-format: '%player%, %distance%'
-#testing 2
 tracker-range: 0
+
+dimension-list-type: WHITELIST # BLACKLIST, OFF
+dimenstion-list:
+  - 'world'
+
+#in ticks
+# 0 for real time
+tracker-refresh-time: 0
+
 tracker-item:
-  type: 'COMPASS'
+  type: COMPASS
   name: 'PlayerTracker'
   lore:
     - 'UwU OwO'
@@ -10,30 +18,13 @@ tracker-item:
   enchanted: true
   craftable: true
   recipe:
-    0:
-      type: 'DIAMOND'
-      amount: 1
-    1:
-      type: 'DIAMOND'
-      amount: 1
-    2:
-      type: 'DIAMOND'
-      amount: 1
-    3:
-      type: 'DIAMOND'
-      amount: 1
-    4:
-      type: 'DIAMOND'
-      amount: 1
-    5:
-      type: 'DIAMOND'
-      amount: 1
-    6:
-      type: 'DIAMOND'
-      amount: 1
-    7:
-      type: 'DIAMOND'
-      amount: 1
-    8:
-      type: 'DIAMOND'
-      amount: 1
+    recipe:
+      - 'AAA'
+      - 'ABA'
+      - 'AAA'
+    ingridients:
+      A: OBSIDIAN
+      B: COMPASS
+
+messages:
+  cycle: 'Now tracking %player%'
