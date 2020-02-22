@@ -32,4 +32,4 @@ messages:
   cycle: 'Now tracking %player%'
   toggle-on: 'You are now tracking %play%'
   toggle-off: 'You are no longer tracking anyone'
-  blacklisted-world: "You can't use it here"
+  blacklisted-dimension: "You can't use it here"
