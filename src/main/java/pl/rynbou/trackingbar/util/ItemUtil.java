@@ -1,7 +1,9 @@
 package pl.rynbou.trackingbar.util;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class ItemUtil {
 
-    private ItemStack loadItemStack(ConfigurationSection itemSection) {
+    public static ItemStack loadItemStack(ConfigurationSection itemSection) {
         String itemString = itemSection.getString("type");
         if (itemString == null) {
             return null;
@@ -43,7 +45,21 @@ public class ItemUtil {
             }
         }
 
-        //todo enchants
+        List<String> enchants = itemSection.getStringList("enchants");
+        if (!enchants.isEmpty()) {
+            ItemMeta im = itemStack.getItemMeta();
+            if (im != null) {
+                for (String s : enchants) {
+                    String enchant = s.split(":")[0];
+                    int power = Integer.parseInt(s.split(":")[1]);
+                    Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchant));
+                    if (enchantment == null)
+                        continue;
+                    im.addEnchant(enchantment, power, true);
+                }
+            }
+
+        }
 
         return itemStack;
     }
