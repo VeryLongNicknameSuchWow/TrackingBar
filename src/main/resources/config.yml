@@ -18,7 +18,7 @@ tracker-item:
     - 'left click to cycle back'
     - 'right click with shift to toggle'
   enchants:
-    - 'Sharpness:5'
+    - 'PROTECTION_FIRE:5'
   craftable: true
   recipe:
     shape:
