@@ -16,6 +16,7 @@ public class TrackingBarMain extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         this.settings = new Settings(this);
+        this.settings.loadConfig();
         this.tracker = new Tracker(this);
 
         getCommand("tracker").setExecutor(new TrackerCommand(this));
