@@ -8,7 +8,7 @@ dimenstion-list:
 
 #in ticks
 # 0 for real time
-tracker-refresh-time: 0
+tracker-refresh-time: 5
 
 tracker-item:
   type: COMPASS
