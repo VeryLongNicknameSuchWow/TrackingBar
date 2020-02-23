@@ -20,13 +20,15 @@ public class TrackingBarMain extends JavaPlugin {
 
         getCommand("tracker").setExecutor(new TrackerCommand(this));
 
-        if (settings.getTrackerRefreshRate() > 0)
+        int refresh = settings.getTrackerRefreshRate();
+        if (refresh > 0) {
             getServer().getScheduler().scheduleSyncRepeatingTask(this,
                     new TrackerRefreshTask(this),
-                    settings.getTrackerRefreshRate(),
-                    settings.getTrackerRefreshRate());
-        else
+                    refresh,
+                    refresh);
+        } else {
             getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
+        }
     }
 
     @Override
