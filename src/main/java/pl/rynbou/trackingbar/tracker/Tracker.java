@@ -1,10 +1,15 @@
 package pl.rynbou.trackingbar.tracker;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 import pl.rynbou.trackingbar.TrackingBarMain;
 import pl.rynbou.trackingbar.user.User;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Tracker {
@@ -25,13 +30,22 @@ public class Tracker {
         trackingUser.getTrackedBy().add(player);
     }
 
-//    public void startTracker(Player player) {
-//        List<Player> closestPlayers = closestPlayers(player);
-//        if (closestPlayers.size() > 0)
-//            trackerMap.put(player, closestPlayers(player).get(0));
-//        else
-//            trackerMap.put(player, null);
-//    }
+    public void refresh(Player player) {
+        Player tracking = getUser(player).getTracking();
+        if (tracking != null) {
+            int distance = (int) plugin.getTracker().distanceBetween(player, tracking);
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    new TextComponent("Tracking: " + tracking.getDisplayName() + " " + distance));
+        }
+    }
+
+    public void refreshForOther(Player player) {
+        getUser(player).getTrackedBy().forEach(trackedBy -> {
+            int dist = (int) plugin.getTracker().distanceBetween(player, trackedBy);
+            trackedBy.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    new TextComponent("Tracking: " + player.getDisplayName() + " " + dist));
+        });
+    }
 
     public List<Player> closestPlayers(Player player) {
         Map<Player, Double> map = new HashMap<>();
@@ -66,5 +80,4 @@ public class Tracker {
         }
         return user;
     }
-
 }
