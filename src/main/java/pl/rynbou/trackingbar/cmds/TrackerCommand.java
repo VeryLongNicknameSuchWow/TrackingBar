@@ -24,6 +24,7 @@ public class TrackerCommand implements CommandExecutor {
 
         if (args.length != 1) {
             sender.sendMessage("Correct usage: /tracker <name>");
+            return true;
         }
 
         Player player = (Player) sender;
