@@ -2,7 +2,6 @@ package pl.rynbou.trackingbar.settings;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -53,8 +52,7 @@ public class Settings {
         craftable = cfg.getBoolean("tracker-item.craftable");
         trackerItem = ItemUtil.loadItemStack(cfg.getConfigurationSection("tracker-item"));
 
-        ConfigurationSection dimensions = cfg.getConfigurationSection("dimenstion-list");
-        for (String s : dimensions.getKeys(false)) {
+        for (String s : cfg.getStringList("dimenstion-list")) {
             dimensionList.add(Bukkit.getWorld(s));
         }
     }
