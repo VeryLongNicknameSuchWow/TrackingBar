@@ -51,22 +51,38 @@ public class Tracker {
     }
 
     public void cycle(Player player) {
-        //TODO
+        User user = getUser(player);
+        Player trackedPlayer = user.getTracking();
+        List<Player> closest = closestPlayers(player);
+        int indexOfCurrent = closest.indexOf(trackedPlayer);
+        if (indexOfCurrent < closest.size() - 1) {
+            trackedPlayer = closest.get(closest.indexOf(trackedPlayer) + 1);
+            user.setTracking(trackedPlayer);
+            player.sendMessage(plugin.getSettings().getCycleMessage()
+                    .replace("%player%", trackedPlayer.getDisplayName()));
+        } else {
+            trackClosest(player);
+        }
     }
 
     public void trackClosest(Player player) {
-        //TODO
+        User user = getUser(player);
+        List<Player> closest = closestPlayers(player);
+        if (closest.size() != 0)
+            user.setTracking(closestPlayers(player).get(0));
+        else
+            user.setTracking(null);
     }
 
     public List<Player> closestPlayers(Player player) {
         Map<Player, Double> map = new HashMap<>();
+        int range = plugin.getSettings().getTrackerRange();
 
         for (Player p : player.getWorld().getPlayers()) {
             if (p == player) continue;
             double distance = distanceBetween(player, p);
-            //TODO fix range check
-//            if (distance < plugin.getSettings().getTrackerRange())
-            map.put(p, distance);
+            if (distance < range || range <= 0)
+                map.put(p, distance);
         }
 
         return map.entrySet().stream().sorted(Map.Entry.comparingByValue()).map(Map.Entry::getKey).collect(Collectors.toList());
