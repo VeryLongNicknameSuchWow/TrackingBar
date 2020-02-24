@@ -16,8 +16,10 @@ public class PlayerInteractEntityListener implements Listener {
 
     @EventHandler
     public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent event) {
+        if (!event.getPlayer().getInventory().getItemInMainHand().equals(plugin.getSettings().getTrackerItem())) return;
         if (!event.getPlayer().isSneaking()) return;
         if (!(event.getRightClicked() instanceof Player)) return;
+
         Player friend = (Player) event.getRightClicked();
         plugin.getTracker().addFriend(event.getPlayer(), friend);
     }
