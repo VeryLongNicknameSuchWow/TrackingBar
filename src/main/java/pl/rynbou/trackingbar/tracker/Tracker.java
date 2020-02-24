@@ -1,5 +1,7 @@
 package pl.rynbou.trackingbar.tracker;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -37,8 +39,8 @@ public class Tracker {
         Player tracking = getUser(player).getTracking();
         if (tracking != null) {
             int distance = (int) plugin.getTracker().distanceBetween(player, tracking);
-//            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-//                    new TextComponent("Tracking: " + tracking.getDisplayName() + " " + distance));
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    new TextComponent("Tracking: " + tracking.getDisplayName() + " " + distance));
             User user = getUser(player);
             if (user.getBarInfo() == null) {
                 //todo config
