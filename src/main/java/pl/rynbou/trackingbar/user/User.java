@@ -11,6 +11,7 @@ public class User {
 
     private Player player;
     private Set<Player> trackedBy = new HashSet<>();
+    private Set<Player> friends = new HashSet<>();
     private Player tracking;
     private BossBar barInfo;
     private BossBar barCompass;
@@ -53,6 +54,10 @@ public class User {
 
     public void setBarCompass(BossBar barCompass) {
         this.barCompass = barCompass;
+    }
+
+    public Set<Player> getFriends() {
+        return friends;
     }
 
     @Override

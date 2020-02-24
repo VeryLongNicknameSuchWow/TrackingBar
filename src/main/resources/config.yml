@@ -17,6 +17,7 @@ tracker-item:
     - 'right click to cycle players'
     - 'left click to cycle back'
     - 'right click with shift to toggle'
+    - 'right click other player while sneaking to disable the tracker on them'
   enchants:
     - 'PROTECTION_FIRE:5'
   craftable: true
@@ -31,6 +32,7 @@ tracker-item:
 
 messages:
   cycle: 'Now tracking %player%'
-  toggle-on: 'You are now tracking %play%'
+  toggle-on: 'You are now tracking %player%'
   toggle-off: 'You are no longer tracking anyone'
   blacklisted-dimension: 'You cannot use it here'
+  friend: 'Tracker will no longer work on %player%'

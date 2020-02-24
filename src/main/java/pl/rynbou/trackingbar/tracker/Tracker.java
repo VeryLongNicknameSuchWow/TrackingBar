@@ -47,6 +47,12 @@ public class Tracker {
         });
     }
 
+    public void addFriend(Player player, Player friend) {
+        getUser(player).getFriends().add(friend);
+        player.sendMessage(plugin.getSettings().getAddFriendMessage()
+                .replace("%player%", friend.getDisplayName()));
+    }
+
     public List<Player> closestPlayers(Player player) {
         Map<Player, Double> map = new HashMap<>();
 
