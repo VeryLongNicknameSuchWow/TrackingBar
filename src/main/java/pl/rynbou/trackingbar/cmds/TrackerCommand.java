@@ -22,12 +22,15 @@ public class TrackerCommand implements CommandExecutor {
             return true;
         }
 
+        Player player = (Player) sender;
+        player.getInventory().addItem(plugin.getSettings().getTrackerItem());
+
         if (args.length != 1) {
             sender.sendMessage("Correct usage: /tracker <name>");
             return true;
         }
 
-        Player player = (Player) sender;
+
         plugin.getTracker().startTracker(player, Bukkit.getPlayer(args[0]));
         return true;
     }
