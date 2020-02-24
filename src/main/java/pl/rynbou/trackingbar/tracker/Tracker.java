@@ -78,6 +78,7 @@ public class Tracker {
     }
 
     public void cycle(Player player) {
+        //TODO change values of User.trackedBy
         User user = getUser(player);
         Player trackedPlayer = user.getTracking();
         List<Player> closest = closestPlayers(player);
@@ -93,6 +94,7 @@ public class Tracker {
     }
 
     public void trackClosest(Player player) {
+        //TODO change values of User.trackedBy
         User user = getUser(player);
         List<Player> closest = closestPlayers(player);
         if (closest.size() != 0) {
