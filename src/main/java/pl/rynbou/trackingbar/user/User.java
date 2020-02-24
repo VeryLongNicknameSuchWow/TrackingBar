@@ -60,6 +60,10 @@ public class User {
         return friends;
     }
 
+    public void setFriends(Set<Player> friends) {
+        this.friends = friends;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
