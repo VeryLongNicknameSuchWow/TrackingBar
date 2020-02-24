@@ -24,11 +24,11 @@ public class AngleUtil {
 //        int space = (int) map(angle, -Math.PI, Math.PI, -90, 90);
 //
         if (angle < -Math.PI / 2) {
-            return "<                                             ";
-        } else if (angle > Math.PI / 2) {
             return "                                             >";
+        } else if (angle > Math.PI / 2) {
+            return "<                                             ";
         } else {
-            int space = (int) map(angle, -Math.PI, Math.PI, -45, 45);
+            int space = (int) map(angle, -Math.PI, Math.PI, -50, 50);
 
             StringBuilder s = new StringBuilder();
 
