@@ -1,10 +1,13 @@
 package pl.rynbou.trackingbar.tracker;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import pl.rynbou.trackingbar.TrackingBarMain;
 import pl.rynbou.trackingbar.user.User;
+import pl.rynbou.trackingbar.util.AngleUtil;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -34,8 +37,30 @@ public class Tracker {
         Player tracking = getUser(player).getTracking();
         if (tracking != null) {
             int distance = (int) plugin.getTracker().distanceBetween(player, tracking);
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new TextComponent("Tracking: " + tracking.getDisplayName() + " " + distance));
+//            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+//                    new TextComponent("Tracking: " + tracking.getDisplayName() + " " + distance));
+            User user = getUser(player);
+            if (user.getBarInfo() == null) {
+                //todo config
+                BossBar bar = Bukkit.createBossBar(" ", BarColor.BLUE, BarStyle.SEGMENTED_20);
+                bar.addPlayer(player);
+                user.setBarInfo(bar);
+            }
+
+            if (user.getBarCompass() == null) {
+                //todo config
+                BossBar bar = Bukkit.createBossBar(" ", BarColor.BLUE, BarStyle.SEGMENTED_20);
+                bar.addPlayer(player);
+                user.setBarCompass(bar);
+            }
+
+            user.getBarInfo().setTitle(plugin.getSettings().getBossBarFormat()
+                    .replace("%player%", tracking.getDisplayName())
+                    .replace("%distance%", distance + ""));
+
+            double angle = AngleUtil.calculateAngle(player.getLocation(), tracking.getLocation());
+            String barMsg = AngleUtil.getBarMessage(angle);
+            user.getBarCompass().setTitle(barMsg);
         }
     }
 

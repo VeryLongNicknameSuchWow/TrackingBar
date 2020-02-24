@@ -24,6 +24,8 @@ public class Settings {
     private int trackerRefreshRate;
     private ItemStack trackerItem;
     private boolean craftable;
+
+    //todo
     private ShapedRecipe recipe;
 
     private String cycleMessage;
