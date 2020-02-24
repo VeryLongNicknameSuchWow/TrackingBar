@@ -40,11 +40,8 @@ public class Tracker {
     }
 
     public void refreshForOther(Player player) {
-        getUser(player).getTrackedBy().forEach(trackedBy -> {
-            int dist = (int) plugin.getTracker().distanceBetween(player, trackedBy);
-            trackedBy.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new TextComponent("Tracking: " + player.getDisplayName() + " " + dist));
-        });
+        for (Player p : getUser(player).getTrackedBy())
+            refresh(p);
     }
 
     public void addFriend(Player player, Player friend) {
