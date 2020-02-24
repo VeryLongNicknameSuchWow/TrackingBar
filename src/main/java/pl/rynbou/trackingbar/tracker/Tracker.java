@@ -53,6 +53,14 @@ public class Tracker {
                 .replace("%player%", friend.getDisplayName()));
     }
 
+    public void cycle(Player player) {
+        //TODO
+    }
+
+    public void trackClosest(Player player) {
+        //TODO
+    }
+
     public List<Player> closestPlayers(Player player) {
         Map<Player, Double> map = new HashMap<>();
 
