@@ -9,6 +9,7 @@ import pl.rynbou.trackingbar.settings.Settings;
 import pl.rynbou.trackingbar.tracker.PlayerMoveListener;
 import pl.rynbou.trackingbar.tracker.Tracker;
 import pl.rynbou.trackingbar.tracker.TrackerRefreshTask;
+import pl.rynbou.trackingbar.user.User;
 
 public class TrackingBarMain extends JavaPlugin {
 
@@ -45,7 +46,10 @@ public class TrackingBarMain extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        for (User user : getTracker().getUsers()) {
+            user.getBarCompass().removeAll();
+            user.getBarInfo().removeAll();
+        }
     }
 
     private void register(Listener listener) {
