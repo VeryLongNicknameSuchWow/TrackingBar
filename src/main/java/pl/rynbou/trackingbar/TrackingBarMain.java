@@ -47,8 +47,10 @@ public class TrackingBarMain extends JavaPlugin {
     @Override
     public void onDisable() {
         for (User user : getTracker().getUsers()) {
-            user.getBarCompass().removeAll();
-            user.getBarInfo().removeAll();
+            if (user.getBarCompass() != null)
+                user.getBarCompass().removeAll();
+            if (user.getBarInfo() != null)
+                user.getBarInfo().removeAll();
         }
     }
 
