@@ -93,9 +93,11 @@ public class Tracker {
     public void trackClosest(Player player) {
         User user = getUser(player);
         List<Player> closest = closestPlayers(player);
-        if (closest.size() != 0)
+        if (closest.size() != 0) {
             user.setTracking(closestPlayers(player).get(0));
-        else
+            player.sendMessage(plugin.getSettings().getCycleMessage()
+                    .replace("%player%", user.getTracking().getDisplayName()));
+        } else
             user.setTracking(null);
     }
 

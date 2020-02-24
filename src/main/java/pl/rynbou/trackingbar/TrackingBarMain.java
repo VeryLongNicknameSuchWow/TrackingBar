@@ -27,7 +27,6 @@ public class TrackingBarMain extends JavaPlugin {
         register(new PlayerInteractListener(this));
         register(new PlayerJoinListener(this));
         register(new PlayerKickListener(this));
-        register(new PlayerKickListener(this));
         register(new PlayerQuitListener(this));
         register(new PlayerRespawnListener(this));
         register(new PlayerTeleportListener(this));

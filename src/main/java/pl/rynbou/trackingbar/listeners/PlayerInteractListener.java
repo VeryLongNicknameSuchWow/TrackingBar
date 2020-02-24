@@ -25,5 +25,7 @@ public class PlayerInteractListener implements Listener {
         if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             plugin.getTracker().cycle(event.getPlayer());
         }
+
+        event.setCancelled(true);
     }
 }

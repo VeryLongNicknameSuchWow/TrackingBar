@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import pl.rynbou.trackingbar.TrackingBarMain;
 
 public class PlayerInteractEntityListener implements Listener {
@@ -16,6 +17,7 @@ public class PlayerInteractEntityListener implements Listener {
 
     @EventHandler
     public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent event) {
+        if (event.getHand() == EquipmentSlot.OFF_HAND) return;
         if (!event.getPlayer().getInventory().getItemInMainHand().isSimilar(plugin.getSettings().getTrackerItem()))
             return;
         if (!event.getPlayer().isSneaking()) return;
@@ -23,5 +25,7 @@ public class PlayerInteractEntityListener implements Listener {
 
         Player friend = (Player) event.getRightClicked();
         plugin.getTracker().addFriend(event.getPlayer(), friend);
+
+        event.setCancelled(true);
     }
 }
