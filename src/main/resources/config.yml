@@ -11,7 +11,7 @@ dimenstion-list:
 tracker-refresh-time: 5
 
 tracker-item:
-  type: COMPASS
+  type: CLOCK
   name: 'PlayerTracker'
   lore:
     - 'right click to cycle players'
