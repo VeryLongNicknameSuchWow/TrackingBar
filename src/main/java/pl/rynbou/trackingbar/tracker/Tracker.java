@@ -29,10 +29,16 @@ public class Tracker {
 
     public void track(Player player, Player tracking) {
         User user = getUser(player);
-        User trackingUser = getUser(tracking);
+        User newPlayer = getUser(tracking);
+
+        if (user.getTracking() != null)
+            getUser(user.getTracking()).getTrackedBy().remove(player);
 
         user.setTracking(tracking);
-        trackingUser.getTrackedBy().add(player);
+        newPlayer.getTrackedBy().add(player);
+
+        player.sendMessage(plugin.getSettings().getToggleOnMessage()
+                .replace("%player%", tracking.getDisplayName()));
     }
 
     public void refresh(Player player) {
@@ -78,29 +84,23 @@ public class Tracker {
     }
 
     public void cycle(Player player) {
-        //TODO change values of User.trackedBy
         User user = getUser(player);
         Player trackedPlayer = user.getTracking();
         List<Player> closest = closestPlayers(player);
         int indexOfCurrent = closest.indexOf(trackedPlayer);
         if (indexOfCurrent < closest.size() - 1) {
             trackedPlayer = closest.get(closest.indexOf(trackedPlayer) + 1);
-            user.setTracking(trackedPlayer);
-            player.sendMessage(plugin.getSettings().getCycleMessage()
-                    .replace("%player%", trackedPlayer.getDisplayName()));
+            track(player, trackedPlayer);
         } else {
             trackClosest(player);
         }
     }
 
     public void trackClosest(Player player) {
-        //TODO change values of User.trackedBy
         User user = getUser(player);
         List<Player> closest = closestPlayers(player);
         if (closest.size() != 0) {
-            user.setTracking(closestPlayers(player).get(0));
-            player.sendMessage(plugin.getSettings().getCycleMessage()
-                    .replace("%player%", user.getTracking().getDisplayName()));
+            track(player, closestPlayers(player).get(0));
         } else
             user.setTracking(null);
     }
