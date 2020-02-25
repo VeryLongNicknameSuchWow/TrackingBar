@@ -1,16 +1,19 @@
 package pl.rynbou.trackingbar.settings;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import pl.rynbou.trackingbar.TrackingBarMain;
 import pl.rynbou.trackingbar.util.ItemUtil;
 import pl.rynbou.trackingbar.util.StrUtil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Settings {
 
@@ -54,7 +57,23 @@ public class Settings {
         addFriendMessage = StrUtil.color(cfg.getString("messages.friend"));
 
         craftable = cfg.getBoolean("tracker-item.craftable");
-        trackerItem = ItemUtil.loadItemStack(cfg.getConfigurationSection("tracker-item"));
+        ConfigurationSection trackerSection = cfg.getConfigurationSection("tracker-item");
+        trackerItem = ItemUtil.loadItemStack(trackerSection);
+
+        if (craftable) {
+            List<String> shape = trackerSection.getStringList("recipe.shape");
+
+            ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft("tracker"), trackerItem);
+
+            recipe.shape(shape.stream().toArray(String[]::new));
+
+            for (String s : trackerSection.getConfigurationSection("recipe.ingredients").getKeys(false)) {
+                recipe.setIngredient(s.toCharArray()[0],
+                        Material.getMaterial(trackerSection.getString("recipe.ingredients." + s)));
+            }
+
+            plugin.getServer().addRecipe(recipe);
+        }
 
         for (String s : cfg.getStringList("dimenstion-list")) {
             dimensionList.add(Bukkit.getWorld(s));
