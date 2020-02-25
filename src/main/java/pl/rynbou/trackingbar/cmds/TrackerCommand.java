@@ -31,7 +31,7 @@ public class TrackerCommand implements CommandExecutor {
         }
 
 
-        plugin.getTracker().startTracker(player, Bukkit.getPlayer(args[0]));
+        plugin.getTracker().track(player, Bukkit.getPlayer(args[0]));
         return true;
     }
 }

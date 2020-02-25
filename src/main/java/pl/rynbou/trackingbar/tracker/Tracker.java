@@ -27,7 +27,7 @@ public class Tracker {
         this.plugin = plugin;
     }
 
-    public void startTracker(Player player, Player tracking) {
+    public void track(Player player, Player tracking) {
         User user = getUser(player);
         User trackingUser = getUser(tracking);
 
