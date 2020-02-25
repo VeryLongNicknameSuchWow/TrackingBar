@@ -27,18 +27,18 @@ public class Tracker {
         this.plugin = plugin;
     }
 
-    public void track(Player player, Player tracking) {
+    public void track(Player player, Player toTrack) {
         User user = getUser(player);
-        User newPlayer = getUser(tracking);
+        User newPlayer = getUser(toTrack);
 
         if (user.getTracking() != null)
             getUser(user.getTracking()).getTrackedBy().remove(player);
 
-        user.setTracking(tracking);
+        user.setTracking(toTrack);
         newPlayer.getTrackedBy().add(player);
 
         player.sendMessage(plugin.getSettings().getToggleOnMessage()
-                .replace("%player%", tracking.getDisplayName()));
+                .replace("%player%", toTrack.getDisplayName()));
     }
 
     public void refresh(Player player) {
@@ -101,16 +101,20 @@ public class Tracker {
         List<Player> closest = closestPlayers(player);
         if (closest.size() != 0) {
             track(player, closestPlayers(player).get(0));
-        } else
+        } else {
+            player.sendMessage(plugin.getSettings().getNoPeopleToTrackMessage());
             user.setTracking(null);
+        }
     }
 
     public List<Player> closestPlayers(Player player) {
         Map<Player, Double> map = new HashMap<>();
         int range = plugin.getSettings().getTrackerRange();
+        User user = getUser(player);
 
         for (Player p : player.getWorld().getPlayers()) {
             if (p == player) continue;
+            if (user.getFriends().contains(p)) continue;
             double distance = distanceBetween(player, p);
             if (distance < range || range <= 0)
                 map.put(p, distance);
