@@ -8,6 +8,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import pl.rynbou.trackingbar.TrackingBarMain;
+import pl.rynbou.trackingbar.settings.DimensionListType;
 import pl.rynbou.trackingbar.user.User;
 import pl.rynbou.trackingbar.util.AngleUtil;
 
@@ -30,6 +31,14 @@ public class Tracker {
     public void track(Player player, Player toTrack) {
         User user = getUser(player);
         User newPlayer = getUser(toTrack);
+
+        if (plugin.getSettings().getDimensionListType() == DimensionListType.BLACKLIST &&
+                plugin.getSettings().getDimensionList().contains(player.getWorld())) {
+            return;
+        } else if (plugin.getSettings().getDimensionListType() == DimensionListType.WHITELIST &&
+                !plugin.getSettings().getDimensionList().contains(player.getWorld())) {
+            return;
+        }
 
         if (user.getTracking() != null)
             getUser(user.getTracking()).getTrackedBy().remove(player);
