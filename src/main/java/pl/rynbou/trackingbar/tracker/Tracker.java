@@ -39,8 +39,11 @@ public class Tracker {
             return;
         }
 
-        if (user.getTracking() != null)
+        if (user.getTracking() == null) {
+            player.sendMessage(plugin.getSettings().getToggleOnMessage());
+        } else {
             getUser(user.getTracking()).getTrackedBy().remove(player);
+        }
 
         user.setTracking(toTrack);
         newPlayer.getTrackedBy().add(player);
@@ -157,7 +160,6 @@ public class Tracker {
     public User getUser(Player player) {
         User user = users.get(player);
         if (user == null) {
-            player.sendMessage(plugin.getSettings().getToggleOnMessage());
             user = new User(player);
             users.put(player, user);
         }
