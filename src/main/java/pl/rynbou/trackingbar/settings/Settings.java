@@ -36,6 +36,7 @@ public class Settings {
     private String toggleOffMessage;
     private String blacklistedDimensionMessage;
     private String addFriendMessage;
+    private String removeFriendMessage;
     private String noPeopleToTrackMessage;
 
     public Settings(TrackingBarMain plugin) {
@@ -56,6 +57,7 @@ public class Settings {
         toggleOffMessage = StrUtil.color(cfg.getString("messages.toggle-off"));
         blacklistedDimensionMessage = StrUtil.color(cfg.getString("messages.blacklisted-dimension"));
         addFriendMessage = StrUtil.color(cfg.getString("messages.friend"));
+        removeFriendMessage = StrUtil.color(cfg.getString("messages.unfriend"));
         noPeopleToTrackMessage = StrUtil.color(cfg.getString("messages.no-players"));
 
         craftable = cfg.getBoolean("tracker-item.craftable");
@@ -136,6 +138,10 @@ public class Settings {
 
     public String getAddFriendMessage() {
         return addFriendMessage;
+    }
+
+    public String getRemoveFriendMessage() {
+        return removeFriendMessage;
     }
 
     public String getNoPeopleToTrackMessage() {

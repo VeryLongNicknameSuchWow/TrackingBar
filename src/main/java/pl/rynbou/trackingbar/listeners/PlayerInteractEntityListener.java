@@ -24,7 +24,7 @@ public class PlayerInteractEntityListener implements Listener {
         if (!(event.getRightClicked() instanceof Player)) return;
 
         Player friend = (Player) event.getRightClicked();
-        plugin.getTracker().addFriend(event.getPlayer(), friend);
+        plugin.getTracker().toggleFriend(event.getPlayer(), friend);
 
         event.setCancelled(true);
     }

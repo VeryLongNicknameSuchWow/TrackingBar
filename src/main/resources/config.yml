@@ -36,4 +36,5 @@ messages:
   toggle-off: 'You are no longer tracking anyone'
   blacklisted-dimension: 'You cannot use it here'
   friend: 'Tracker will no longer work on %player%'
+  unfriend: 'Tracker will work on %player% again'
   no-players: 'There are no people in range'

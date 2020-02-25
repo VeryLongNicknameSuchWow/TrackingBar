@@ -77,10 +77,17 @@ public class Tracker {
             refresh(p);
     }
 
-    public void addFriend(Player player, Player friend) {
-        getUser(player).getFriends().add(friend);
-        player.sendMessage(plugin.getSettings().getAddFriendMessage()
-                .replace("%player%", friend.getDisplayName()));
+    public void toggleFriend(Player player, Player friend) {
+        User user = getUser(player);
+        if (user.getFriends().contains(friend)) {
+            user.getFriends().remove(friend);
+            player.sendMessage(plugin.getSettings().getRemoveFriendMessage()
+                    .replace("%player%", friend.getDisplayName()));
+        } else {
+            getUser(player).getFriends().add(friend);
+            player.sendMessage(plugin.getSettings().getAddFriendMessage()
+                    .replace("%player%", friend.getDisplayName()));
+        }
     }
 
     public void cycle(Player player) {
