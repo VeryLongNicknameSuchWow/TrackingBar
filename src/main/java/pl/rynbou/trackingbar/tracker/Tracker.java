@@ -120,6 +120,7 @@ public class Tracker {
         } else {
             player.sendMessage(plugin.getSettings().getNoPeopleToTrackMessage());
             user.setTracking(null);
+            clearBossBar(player);
         }
     }
 
@@ -170,5 +171,10 @@ public class Tracker {
         }
         getUser(user.getTracking()).getTrackedBy().remove(player);
         plugin.getTracker().getUsers().remove(user);
+    }
+
+    public void clearBossBar(Player player) {
+        getUser(player).getBarInfo().removeAll();
+        getUser(player).getBarCompass().removeAll();
     }
 }
