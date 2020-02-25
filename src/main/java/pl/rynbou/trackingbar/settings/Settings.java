@@ -65,7 +65,7 @@ public class Settings {
 
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft("tracker"), trackerItem);
 
-            recipe.shape(shape.toArray(new String[0]));
+            recipe.shape(shape.stream().toArray(String[]::new));
 
             for (String s : trackerSection.getConfigurationSection("recipe.ingredients").getKeys(false)) {
                 recipe.setIngredient(s.toCharArray()[0],
