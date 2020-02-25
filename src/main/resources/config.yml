@@ -31,7 +31,8 @@ tracker-item:
       B: COMPASS
 
 messages:
-  cycle: 'Now tracking %player%'
+  cycle: 'Tracking next player: %player%'
+  closest: 'Tracking closest player: %player%'
   toggle-on: 'Tracker enabled'
   toggle-off: 'Tracker disabled'
   blacklisted-dimension: 'You cannot use it here'

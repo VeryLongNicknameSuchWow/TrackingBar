@@ -32,6 +32,7 @@ public class Settings {
     private ShapedRecipe recipe;
 
     private String cycleMessage;
+    private String closestMessage;
     private String toggleOnMessage;
     private String toggleOffMessage;
     private String blacklistedDimensionMessage;
@@ -53,6 +54,7 @@ public class Settings {
         trackerRefreshRate = cfg.getInt("tracker-refresh-time");
 
         cycleMessage = StrUtil.color(cfg.getString("messages.cycle"));
+        closestMessage = StrUtil.color(cfg.getString("messages.closest"));
         toggleOnMessage = StrUtil.color(cfg.getString("messages.toggle-on"));
         toggleOffMessage = StrUtil.color(cfg.getString("messages.toggle-off"));
         blacklistedDimensionMessage = StrUtil.color(cfg.getString("messages.blacklisted-dimension"));
@@ -146,5 +148,9 @@ public class Settings {
 
     public String getNoPeopleToTrackMessage() {
         return noPeopleToTrackMessage;
+    }
+
+    public String getClosestMessage() {
+        return closestMessage;
     }
 }

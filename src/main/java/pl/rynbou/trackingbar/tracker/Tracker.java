@@ -47,9 +47,6 @@ public class Tracker {
 
         user.setTracking(toTrack);
         newPlayer.getTrackedBy().add(player);
-
-        player.sendMessage(plugin.getSettings().getCycleMessage()
-                .replace("%player%", toTrack.getDisplayName()));
     }
 
     public void refresh(Player player) {
@@ -107,6 +104,8 @@ public class Tracker {
         if (indexOfCurrent < closest.size() - 1) {
             trackedPlayer = closest.get(closest.indexOf(trackedPlayer) + 1);
             track(player, trackedPlayer);
+            player.sendMessage(plugin.getSettings().getCycleMessage()
+                    .replace("%player%", trackedPlayer.getDisplayName()));
         } else {
             trackClosest(player);
         }
@@ -119,6 +118,8 @@ public class Tracker {
             player.sendMessage(plugin.getSettings().getNoPeopleToTrackMessage());
         } else if (!closest.get(0).equals(user.getTracking())) {
             track(player, closest.get(0));
+            player.sendMessage(plugin.getSettings().getClosestMessage()
+                    .replace("%player%", closest.get(0).getDisplayName()));
         } else {
             player.sendMessage(plugin.getSettings().getToggleOffMessage());
             user.setTracking(null);
