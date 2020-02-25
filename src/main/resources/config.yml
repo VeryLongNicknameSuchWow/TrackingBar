@@ -29,6 +29,7 @@ tracker-item:
       A: OBSIDIAN
       B: COMPASS
 
+messages-type: ACTIONBAR # CHAT, OFF
 messages:
   cycle: 'Tracking next player: %player%'
   closest: 'Tracking closest player: %player%'

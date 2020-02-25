@@ -10,11 +10,13 @@ import pl.rynbou.trackingbar.tracker.PlayerMoveListener;
 import pl.rynbou.trackingbar.tracker.Tracker;
 import pl.rynbou.trackingbar.tracker.TrackerRefreshTask;
 import pl.rynbou.trackingbar.user.User;
+import pl.rynbou.trackingbar.util.MessageUtil;
 
 public class TrackingBarMain extends JavaPlugin {
 
     private Settings settings;
     private Tracker tracker;
+    private MessageUtil messages;
 
     @Override
     public void onEnable() {
@@ -22,6 +24,7 @@ public class TrackingBarMain extends JavaPlugin {
         this.settings = new Settings(this);
         this.settings.loadConfig();
         this.tracker = new Tracker(this);
+        this.messages = new MessageUtil(this);
 
         register("tracker", new TrackerCommand(this));
         register(new PlayerInteractEntityListener(this));
@@ -68,5 +71,9 @@ public class TrackingBarMain extends JavaPlugin {
 
     public Tracker getTracker() {
         return tracker;
+    }
+
+    public MessageUtil getMessages() {
+        return messages;
     }
 }

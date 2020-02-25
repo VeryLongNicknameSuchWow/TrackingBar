@@ -35,12 +35,12 @@ public class Tracker {
                 plugin.getSettings().getDimensionList().contains(player.getWorld())) ||
                 (plugin.getSettings().getDimensionListType() == DimensionListType.WHITELIST &&
                         !plugin.getSettings().getDimensionList().contains(player.getWorld()))) {
-            player.sendMessage(plugin.getSettings().getBlacklistedDimensionMessage());
+            plugin.getMessages().sendBlacklistedDimensionMessage(player);
             return;
         }
 
         if (user.getTracking() == null) {
-            player.sendMessage(plugin.getSettings().getToggleOnMessage());
+            plugin.getMessages().sendToggleOnMessage(player);
         } else {
             getUser(user.getTracking()).getTrackedBy().remove(player);
         }
@@ -87,12 +87,10 @@ public class Tracker {
         User user = getUser(player);
         if (user.getFriends().contains(friend)) {
             user.getFriends().remove(friend);
-            player.sendMessage(plugin.getSettings().getRemoveFriendMessage()
-                    .replace("%player%", friend.getDisplayName()));
+            plugin.getMessages().sendUnfriendMessage(player, friend);
         } else {
             getUser(player).getFriends().add(friend);
-            player.sendMessage(plugin.getSettings().getAddFriendMessage()
-                    .replace("%player%", friend.getDisplayName()));
+            plugin.getMessages().sendFriendMessage(player, friend);
         }
     }
 
@@ -104,8 +102,7 @@ public class Tracker {
         if (indexOfCurrent < closest.size() - 1) {
             trackedPlayer = closest.get(closest.indexOf(trackedPlayer) + 1);
             track(player, trackedPlayer);
-            player.sendMessage(plugin.getSettings().getCycleMessage()
-                    .replace("%player%", trackedPlayer.getDisplayName()));
+            plugin.getMessages().sendCycleMessage(player, trackedPlayer);
         } else {
             trackClosest(player);
         }
@@ -115,13 +112,12 @@ public class Tracker {
         User user = getUser(player);
         List<Player> closest = closestPlayers(player);
         if (closest.size() == 0) {
-            player.sendMessage(plugin.getSettings().getNoPeopleToTrackMessage());
+            plugin.getMessages().sendNoPlayersMessage(player);
         } else if (!closest.get(0).equals(user.getTracking())) {
             track(player, closest.get(0));
-            player.sendMessage(plugin.getSettings().getClosestMessage()
-                    .replace("%player%", closest.get(0).getDisplayName()));
+            plugin.getMessages().sendClosestMessage(player, closest.get(0));
         } else {
-            player.sendMessage(plugin.getSettings().getToggleOffMessage());
+            plugin.getMessages().sendToggleOffMessage(player);
             user.setTracking(null);
             clearBossBar(player);
         }

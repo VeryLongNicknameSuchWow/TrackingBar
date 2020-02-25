@@ -27,6 +27,7 @@ public class Settings {
     private int trackerRefreshRate;
     private ItemStack trackerItem;
     private boolean craftable;
+    private MessageLocation messageLocation;
 
     private ShapedRecipe recipe;
 
@@ -50,6 +51,7 @@ public class Settings {
         trackerRange = cfg.getInt("tracker-range");
         dimensionListType = DimensionListType.valueOf(cfg.getString("dimension-list-type"));
         trackerRefreshRate = cfg.getInt("tracker-refresh-time");
+        messageLocation = MessageLocation.valueOf(cfg.getString("messages-type"));
 
         cycleMessage = StrUtil.color(cfg.getString("messages.cycle"));
         closestMessage = StrUtil.color(cfg.getString("messages.closest"));
@@ -146,5 +148,9 @@ public class Settings {
 
     public String getClosestMessage() {
         return closestMessage;
+    }
+
+    public MessageLocation getMessageLocation() {
+        return messageLocation;
     }
 }
