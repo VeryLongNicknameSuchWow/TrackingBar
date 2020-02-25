@@ -21,7 +21,6 @@ public class Settings {
     private TrackingBarMain plugin;
 
     private String bossBarFormat;
-    private String bossBarFormatNoPlayersFound;
     private int trackerRange;
     private DimensionListType dimensionListType;
     private Set<World> dimensionList = new HashSet<>();
@@ -48,7 +47,6 @@ public class Settings {
         FileConfiguration cfg = plugin.getConfig();
 
         bossBarFormat = cfg.getString("bossbar-format");
-        bossBarFormatNoPlayersFound = cfg.getString("bossbar-format-no-players-found");
         trackerRange = cfg.getInt("tracker-range");
         dimensionListType = DimensionListType.valueOf(cfg.getString("dimension-list-type"));
         trackerRefreshRate = cfg.getInt("tracker-refresh-time");
@@ -88,10 +86,6 @@ public class Settings {
 
     public String getBossBarFormat() {
         return bossBarFormat;
-    }
-
-    public String getBossBarFormatNoPlayersFound() {
-        return bossBarFormatNoPlayersFound;
     }
 
     public int getTrackerRange() {

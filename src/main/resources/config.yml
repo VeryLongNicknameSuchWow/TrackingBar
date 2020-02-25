@@ -1,5 +1,4 @@
 bossbar-format: '%player%, %distance%'
-bossbar-format-no-players-found: 'No players found'
 tracker-range: 0
 
 dimension-list-type: WHITELIST # BLACKLIST, OFF
