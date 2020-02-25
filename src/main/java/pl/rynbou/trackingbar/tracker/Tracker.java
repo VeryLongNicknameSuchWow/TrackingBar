@@ -132,6 +132,7 @@ public class Tracker {
             if (p == player) continue;
             if (user.getFriends().contains(p)) continue;
             double distance = distanceBetween(player, p);
+            if (distance < 0) continue;
             if (distance < range || range <= 0)
                 map.put(p, distance);
         }
@@ -140,6 +141,9 @@ public class Tracker {
     }
 
     public double distanceBetween(Player p1, Player p2) {
+        if (!p1.getWorld().getPlayers().contains(p2)) {
+            return -1;
+        }
         double deltaX = p1.getLocation().getX() - p2.getLocation().getX();
         double deltaZ = p1.getLocation().getZ() - p2.getLocation().getZ();
 
