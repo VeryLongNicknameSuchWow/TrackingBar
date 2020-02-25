@@ -167,7 +167,7 @@ public class Tracker {
     public void removeUser(Player player) {
         User user = getUser(player);
         for (Player p : user.getTrackedBy()) {
-            cycle(p);
+            trackClosest(p);
         }
         getUser(user.getTracking()).getTrackedBy().remove(player);
         plugin.getTracker().getUsers().remove(user);
