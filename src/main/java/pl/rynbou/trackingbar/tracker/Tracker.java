@@ -28,10 +28,6 @@ public class Tracker {
 
     public void track(Player player, Player toTrack) {
 
-        if (users.get(player) == null) {
-            player.sendMessage(plugin.getSettings().getToggleOnMessage());
-        }
-
         User user = getUser(player);
         User newPlayer = getUser(toTrack);
 
@@ -161,6 +157,7 @@ public class Tracker {
     public User getUser(Player player) {
         User user = users.get(player);
         if (user == null) {
+            player.sendMessage(plugin.getSettings().getToggleOnMessage());
             user = new User(player);
             users.put(player, user);
         }
