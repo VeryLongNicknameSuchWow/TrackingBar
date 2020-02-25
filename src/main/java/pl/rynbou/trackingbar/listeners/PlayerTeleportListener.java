@@ -15,6 +15,6 @@ public class PlayerTeleportListener implements Listener {
 
     @EventHandler
     public void onPlayerTeleportEvent(PlayerTeleportEvent event) {
-
+        plugin.getTracker().removeUser(event.getPlayer());
     }
 }

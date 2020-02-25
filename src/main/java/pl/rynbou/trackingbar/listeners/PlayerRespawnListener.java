@@ -15,6 +15,6 @@ public class PlayerRespawnListener implements Listener {
 
     @EventHandler
     public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
-
+        plugin.getTracker().removeUser(event.getPlayer());
     }
 }
