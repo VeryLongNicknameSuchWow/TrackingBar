@@ -15,6 +15,6 @@ public class PlayerQuitListener implements Listener {
 
     @EventHandler
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
-
+        plugin.getTracker().removeUser(event.getPlayer());
     }
 }

@@ -15,6 +15,6 @@ public class PlayerKickListener implements Listener {
 
     @EventHandler
     public void onPlayerKickEvent(PlayerKickEvent event) {
-
+        plugin.getTracker().removeUser(event.getPlayer());
     }
 }
