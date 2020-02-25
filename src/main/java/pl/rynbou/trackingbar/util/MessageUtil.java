@@ -53,7 +53,7 @@ public class MessageUtil {
         message = StrUtil.color(message);
 
         switch (plugin.getSettings().getMessageLocation()) {
-            case ACTION:
+            case ACTIONBAR:
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
                 break;
             case CHAT:
