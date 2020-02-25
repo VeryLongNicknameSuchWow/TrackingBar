@@ -27,6 +27,11 @@ public class Tracker {
     }
 
     public void track(Player player, Player toTrack) {
+
+        if (users.get(player) == null) {
+            player.sendMessage(plugin.getSettings().getToggleOnMessage());
+        }
+
         User user = getUser(player);
         User newPlayer = getUser(toTrack);
 
@@ -44,7 +49,7 @@ public class Tracker {
         user.setTracking(toTrack);
         newPlayer.getTrackedBy().add(player);
 
-        player.sendMessage(plugin.getSettings().getToggleOnMessage()
+        player.sendMessage(plugin.getSettings().getCycleMessage()
                 .replace("%player%", toTrack.getDisplayName()));
     }
 
@@ -111,10 +116,12 @@ public class Tracker {
     public void trackClosest(Player player) {
         User user = getUser(player);
         List<Player> closest = closestPlayers(player);
-        if (closest.size() != 0 && !closest.get(0).equals(user.getTracking())) {
+        if (closest.size() == 0) {
+            player.sendMessage(plugin.getSettings().getNoPeopleToTrackMessage());
+        } else if (!closest.get(0).equals(user.getTracking())) {
             track(player, closest.get(0));
         } else {
-            player.sendMessage(plugin.getSettings().getNoPeopleToTrackMessage());
+            player.sendMessage(plugin.getSettings().getToggleOffMessage());
             user.setTracking(null);
             clearBossBar(player);
         }
