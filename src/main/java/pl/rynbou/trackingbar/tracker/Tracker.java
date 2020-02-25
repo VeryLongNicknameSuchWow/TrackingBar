@@ -174,7 +174,10 @@ public class Tracker {
     }
 
     public void clearBossBar(Player player) {
-        getUser(player).getBarInfo().removeAll();
-        getUser(player).getBarCompass().removeAll();
+        User user = getUser(player);
+        user.getBarInfo().removeAll();
+        user.getBarCompass().removeAll();
+        user.setBarInfo(null);
+        user.setBarCompass(null);
     }
 }
