@@ -13,10 +13,7 @@ import pl.rynbou.trackingbar.TrackingBarMain;
 import pl.rynbou.trackingbar.util.ItemUtil;
 import pl.rynbou.trackingbar.util.StrUtil;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Settings {
 
@@ -68,7 +65,7 @@ public class Settings {
 
             ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft("tracker"), trackerItem);
 
-            recipe.shape((String[]) shape.toArray());
+            recipe.shape(shape.toArray(new String[0]));
 
             for (String s : trackerSection.getConfigurationSection("recipe.ingredients").getKeys(false)) {
                 recipe.setIngredient(s.toCharArray()[0],
