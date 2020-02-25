@@ -79,7 +79,7 @@ public class Settings {
             plugin.getServer().addRecipe(recipe);
         }
 
-        for (String s : cfg.getStringList("dimenstion-list")) {
+        for (String s : cfg.getStringList("dimension-list")) {
             dimensionList.add(Bukkit.getWorld(s));
         }
     }

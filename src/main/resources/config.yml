@@ -3,7 +3,7 @@ bossbar-format-no-players-found: 'No players found'
 tracker-range: 0
 
 dimension-list-type: WHITELIST # BLACKLIST, OFF
-dimenstion-list:
+dimension-list:
   - 'world'
 
 #in ticks
