@@ -57,6 +57,7 @@ public class ItemUtil {
                     Enchantment enchantment = EnchantmentWrapper.getByKey(NamespacedKey.minecraft(enchant.toLowerCase()));
                     if (enchantment != null)
                         im.addEnchant(enchantment, power, true);
+                    Bukkit.broadcastMessage(enchantment.getKey().getKey());
                 }
                 im.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 5, true);
                 Bukkit.broadcastMessage("Applying enchantments");
