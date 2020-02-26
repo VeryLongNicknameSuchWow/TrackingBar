@@ -47,14 +47,16 @@ public class ItemUtil {
 
         List<String> enchants = itemSection.getStringList("enchants");
         if (!enchants.isEmpty()) {
-            for (String s : enchants) {
-                String enchant = s.split(":")[0];
-                int power = Integer.parseInt(s.split(":")[1]);
-                Enchantment enchantment = EnchantmentWrapper.getByName(enchant);
-                if (enchantment != null)
-                    itemStack.addEnchantment(enchantment, power);
-                else
-                    throw new RuntimeException(enchant + " is not a valid enchant");
+            ItemMeta im = itemStack.getItemMeta();
+            if (im != null) {
+                for (String s : enchants) {
+                    String enchant = s.split(":")[0];
+                    int power = Integer.parseInt(s.split(":")[1]);
+                    Enchantment enchantment = EnchantmentWrapper.getByName(enchant);
+                    if (enchantment != null)
+                        im.addEnchant(enchantment, power, true);
+                }
+                itemStack.setItemMeta(im);
             }
         }
 
