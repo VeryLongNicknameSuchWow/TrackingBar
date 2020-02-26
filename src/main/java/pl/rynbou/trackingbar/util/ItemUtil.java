@@ -2,7 +2,6 @@ package pl.rynbou.trackingbar.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
@@ -54,7 +53,7 @@ public class ItemUtil {
                 for (String s : enchants) {
                     String enchant = s.split(":")[0];
                     int power = Integer.parseInt(s.split(":")[1]);
-                    Enchantment enchantment = EnchantmentWrapper.getByKey(NamespacedKey.minecraft(enchant.toLowerCase()));
+                    Enchantment enchantment = EnchantmentWrapper.getByName(enchant);
                     if (enchantment != null)
                         im.addEnchant(enchantment, power, true);
                 }
