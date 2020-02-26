@@ -1,5 +1,6 @@
 package pl.rynbou.trackingbar.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -57,6 +58,7 @@ public class ItemUtil {
                         continue;
                     im.addEnchant(enchantment, power, true);
                     im.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 5, true);
+                    Bukkit.broadcastMessage("Applying enchantments");
                 }
             }
         }
