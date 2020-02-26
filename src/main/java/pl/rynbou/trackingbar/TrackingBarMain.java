@@ -1,6 +1,7 @@
 package pl.rynbou.trackingbar;
 
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.rynbou.trackingbar.cmds.TrackerCommand;
@@ -67,8 +68,13 @@ public class TrackingBarMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(listener, this);
     }
 
-    private void register(String command, CommandExecutor executor) {
-        getCommand(command).setExecutor(executor);
+    private void register(String name, CommandExecutor executor) {
+        PluginCommand command = getCommand(name);
+        if (command == null) {
+            getServer().getLogger().warning("Could not register command: " + name);
+            return;
+        }
+        command.setExecutor(executor);
     }
 
     public Settings getSettings() {
