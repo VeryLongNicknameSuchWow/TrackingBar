@@ -22,7 +22,12 @@ public class TrackingBarMain extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         this.settings = new Settings(this);
-        this.settings.loadConfig();
+        boolean success = this.settings.loadConfig();
+        if (!success) {
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
         this.tracker = new Tracker(this);
         this.messages = new MessageUtil(this);
 

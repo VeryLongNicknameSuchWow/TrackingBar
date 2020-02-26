@@ -44,46 +44,147 @@ public class Settings {
         this.plugin = plugin;
     }
 
-    public void loadConfig() {
+    public boolean loadConfig() {
+        dimensionList = new HashSet<>();
         FileConfiguration cfg = plugin.getConfig();
 
         bossBarFormat = cfg.getString("bossbar-format");
+        if (bossBarFormat == null) {
+            plugin.getServer().getLogger().warning("Invalid bossbar-format");
+            return false;
+        }
+
         trackerRange = cfg.getInt("tracker-range");
-        dimensionListType = DimensionListType.valueOf(cfg.getString("dimension-list-type"));
+        if (trackerRange < 0) {
+            plugin.getServer().getLogger().warning("Invalid tracker-range");
+            return false;
+        }
+
+        try {
+            dimensionListType = DimensionListType.valueOf(cfg.getString("dimension-list-type"));
+        } catch (IllegalArgumentException e) {
+            plugin.getServer().getLogger().warning("Invalid dimension-list-type");
+            e.printStackTrace();
+            return false;
+        }
+
         trackerRefreshRate = cfg.getInt("tracker-refresh-time");
-        messageLocation = MessageLocation.valueOf(cfg.getString("messages-type"));
+        if (trackerRefreshRate < 0) {
+            plugin.getServer().getLogger().warning("Invalid tracker-refresh-time");
+            return false;
+        }
+
+        try {
+            messageLocation = MessageLocation.valueOf(cfg.getString("messages-type"));
+        } catch (IllegalArgumentException e) {
+            plugin.getServer().getLogger().warning("Invalid messages-type");
+            e.printStackTrace();
+            return false;
+        }
 
         cycleMessage = StrUtil.color(cfg.getString("messages.cycle"));
+        if (cycleMessage.equals("")) {
+            plugin.getServer().getLogger().warning("Empty/invalid cycle message");
+            return false;
+        }
+
         closestMessage = StrUtil.color(cfg.getString("messages.closest"));
+        if (cycleMessage.equals("")) {
+            plugin.getServer().getLogger().warning("Empty/invalid closest message");
+            return false;
+        }
+
         toggleOnMessage = StrUtil.color(cfg.getString("messages.toggle-on"));
+        if (toggleOnMessage.equals("")) {
+            plugin.getServer().getLogger().warning("Empty/invalid toggle-on message");
+            return false;
+        }
+
         toggleOffMessage = StrUtil.color(cfg.getString("messages.toggle-off"));
+        if (toggleOnMessage.equals("")) {
+            plugin.getServer().getLogger().warning("Empty/invalid toggle-off message");
+            return false;
+        }
+
         blacklistedDimensionMessage = StrUtil.color(cfg.getString("messages.blacklisted-dimension"));
+        if (blacklistedDimensionMessage.equals("")) {
+            plugin.getServer().getLogger().warning("Empty/invalid blacklisted-dimension message");
+            return false;
+        }
+
         addFriendMessage = StrUtil.color(cfg.getString("messages.friend"));
+        if (addFriendMessage.equals("")) {
+            plugin.getServer().getLogger().warning("Empty/invalid closest friend message");
+            return false;
+        }
+
         removeFriendMessage = StrUtil.color(cfg.getString("messages.unfriend"));
+        if (addFriendMessage.equals("")) {
+            plugin.getServer().getLogger().warning("Empty/invalid closest unfriend message");
+            return false;
+        }
+
         noPeopleToTrackMessage = StrUtil.color(cfg.getString("messages.no-players"));
-
-        craftable = cfg.getBoolean("tracker-item.craftable");
-        ConfigurationSection trackerSection = cfg.getConfigurationSection("tracker-item");
-        trackerItem = ItemUtil.loadItemStack(trackerSection);
-
-        if (craftable) {
-            List<String> shape = trackerSection.getStringList("recipe.shape");
-
-            recipe = new ShapedRecipe(NamespacedKey.minecraft("tracker"), trackerItem);
-
-            recipe.shape(shape.stream().toArray(String[]::new));
-
-            for (String s : trackerSection.getConfigurationSection("recipe.ingredients").getKeys(false)) {
-                recipe.setIngredient(s.toCharArray()[0],
-                        Material.getMaterial(trackerSection.getString("recipe.ingredients." + s)));
-            }
-
-            plugin.getServer().addRecipe(recipe);
+        if (addFriendMessage.equals("")) {
+            plugin.getServer().getLogger().warning("Empty/invalid closest no-players message");
+            return false;
         }
 
         for (String s : cfg.getStringList("dimension-list")) {
-            dimensionList.add(Bukkit.getWorld(s));
+            World world = Bukkit.getWorld(s);
+            if (world == null) {
+                plugin.getServer().getLogger().warning("Invalid world: " + s);
+                return false;
+            }
+            dimensionList.add(world);
         }
+
+        craftable = cfg.getBoolean("tracker-item.craftable");
+        if (!craftable) return true;
+
+        ConfigurationSection trackerSection = cfg.getConfigurationSection("tracker-item");
+        if (trackerSection == null) {
+            plugin.getServer().getLogger().warning("Missing tracker-item section");
+            return false;
+        }
+
+        try {
+            trackerItem = ItemUtil.loadItemStack(trackerSection);
+        } catch (Exception e) {
+            plugin.getServer().getLogger().warning("Invalid tracker-item section");
+            e.printStackTrace();
+            return false;
+        }
+
+        List<String> shape = trackerSection.getStringList("recipe.shape");
+        recipe = new ShapedRecipe(NamespacedKey.minecraft("tracker"), trackerItem);
+
+        recipe.shape(shape.stream().toArray(String[]::new));
+
+        ConfigurationSection ingredients = trackerSection.getConfigurationSection("recipe.ingredients");
+        if (ingredients == null) {
+            plugin.getServer().getLogger().warning("Missing ingredients section");
+            return false;
+        }
+
+        for (String s : ingredients.getKeys(false)) {
+            String materialString = trackerSection.getString("recipe.ingredients." + s);
+            if (materialString == null) {
+                plugin.getServer().getLogger().warning("Invalid material in ingredients section");
+                return false;
+            }
+
+            Material material = Material.getMaterial(materialString);
+            if (material == null) {
+                plugin.getServer().getLogger().warning("Invalid material in ingredients section");
+                return false;
+            }
+            recipe.setIngredient(s.toCharArray()[0], material);
+        }
+
+        plugin.getServer().addRecipe(recipe);
+
+        return true;
     }
 
     public String getBossBarFormat() {

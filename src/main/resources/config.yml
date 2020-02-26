@@ -1,11 +1,15 @@
+# Available variables: %player%, %distance%
 bossbar-format: '%player%, %distance%'
+
+# 0 for unlimited range
 tracker-range: 0
 
-dimension-list-type: WHITELIST # BLACKLIST, OFF
+# WHITELIST, BLACKLIST, OFF
+dimension-list-type: WHITELIST
 dimension-list:
   - 'world'
 
-#in ticks
+# in ticks
 # 0 for real time
 tracker-refresh-time: 5
 
@@ -29,13 +33,14 @@ tracker-item:
       A: OBSIDIAN
       B: COMPASS
 
-messages-type: ACTIONBAR # CHAT, OFF
+# ACTIONBAR, CHAT, OFF
+messages-type: ACTIONBAR
 messages:
   cycle: 'Tracking next player: %player%'
   closest: 'Tracking closest player: %player%'
   toggle-on: 'Tracker enabled'
   toggle-off: 'Tracker disabled'
-  blacklisted-dimension: 'You cannot use it here'
+  blacklisted-dimension: 'You cannot use tracker in this world'
   friend: 'Tracker will no longer work on %player%'
   unfriend: 'Tracker will work on %player% again'
   no-players: 'There are no people in range'

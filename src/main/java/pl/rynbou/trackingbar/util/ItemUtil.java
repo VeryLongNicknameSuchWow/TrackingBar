@@ -13,19 +13,22 @@ import java.util.List;
 public class ItemUtil {
 
     public static ItemStack loadItemStack(ConfigurationSection itemSection) {
-        String itemString = itemSection.getString("type");
-        if (itemString == null) {
-            return null;
+        String materialString = itemSection.getString("type");
+        if (materialString == null) {
+            throw new RuntimeException("Invalid tracker-item material");
         }
         ItemStack itemStack;
-        Material material = Material.getMaterial(itemString);
+        Material material = Material.getMaterial(materialString);
         if (material == null) {
-            return null;
+            throw new RuntimeException("Invalid tracker-item material");
         }
         itemStack = new ItemStack(material);
 
         String name = itemSection.getString("name");
-        if (name != null && !name.isEmpty()) {
+        if (name == null) {
+            throw new RuntimeException("Invalid tracker-item name");
+        }
+        if (!name.isEmpty()) {
             String nameColor = StrUtil.color(name);
             ItemMeta im = itemStack.getItemMeta();
             if (im != null) {
@@ -53,8 +56,9 @@ public class ItemUtil {
                     String enchant = s.split(":")[0];
                     int power = Integer.parseInt(s.split(":")[1]);
                     Enchantment enchantment = EnchantmentWrapper.getByName(enchant);
-                    if (enchantment != null)
-                        im.addEnchant(enchantment, power, true);
+                    if (enchantment == null)
+                        throw new RuntimeException("Invalid tracker-item enchant: " + s);
+                    im.addEnchant(enchantment, power, true);
                 }
                 itemStack.setItemMeta(im);
             }
