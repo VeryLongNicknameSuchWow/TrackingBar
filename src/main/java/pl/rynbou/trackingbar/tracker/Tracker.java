@@ -117,9 +117,7 @@ public class Tracker {
             track(player, closest.get(0));
             plugin.getMessages().sendClosestMessage(player, closest.get(0));
         } else {
-            plugin.getMessages().sendToggleOffMessage(player);
-            user.setTracking(null);
-            clearBossBar(player);
+            disable(player);
         }
     }
 
@@ -150,6 +148,25 @@ public class Tracker {
         return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaZ, 2));
     }
 
+    public void disable(Player player) {
+        User user = getUser(player);
+        plugin.getMessages().sendToggleOffMessage(player);
+        user.setTracking(null);
+        clearBossBar(player);
+    }
+
+    public void clearBossBar(Player player) {
+        User user = getUser(player);
+        if (user.getBarInfo() != null) {
+            user.getBarInfo().removeAll();
+            user.setBarInfo(null);
+        }
+        if (user.getBarCompass() != null) {
+            user.getBarCompass().removeAll();
+            user.setBarCompass(null);
+        }
+    }
+
     public Collection<User> getUsers() {
         return users.values();
     }
@@ -170,17 +187,5 @@ public class Tracker {
         }
         getUser(user.getTracking()).getTrackedBy().remove(player);
         plugin.getTracker().getUsers().remove(user);
-    }
-
-    public void clearBossBar(Player player) {
-        User user = getUser(player);
-        if (user.getBarInfo() != null) {
-            user.getBarInfo().removeAll();
-            user.setBarInfo(null);
-        }
-        if (user.getBarCompass() != null) {
-            user.getBarCompass().removeAll();
-            user.setBarCompass(null);
-        }
     }
 }
