@@ -1,5 +1,5 @@
 name: TrackingBar
-version: 1.0-SNAPSHOT
+version: ${project.version}
 main: pl.rynbou.trackingbar.TrackingBarMain
 api-version: 1.15
 commands:
