@@ -54,7 +54,7 @@ public class ItemUtil {
                 for (String s : enchants) {
                     String enchant = s.split(":")[0];
                     int power = Integer.parseInt(s.split(":")[1]);
-                    Enchantment enchantment = EnchantmentWrapper.getByKey(NamespacedKey.minecraft(enchant));
+                    Enchantment enchantment = EnchantmentWrapper.getByKey(NamespacedKey.minecraft(enchant.toLowerCase()));
                     if (enchantment != null)
                         im.addEnchant(enchantment, power, true);
                 }

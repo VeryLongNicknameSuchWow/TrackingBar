@@ -18,7 +18,7 @@ tracker-item:
     - 'right click with shift to toggle'
     - 'right click other player while sneaking to disable the tracker on them'
   enchants:
-    - 'PROTECTION_FIRE:5'
+    - 'SHARPNESS:5'
   craftable: true
   recipe:
     shape:
