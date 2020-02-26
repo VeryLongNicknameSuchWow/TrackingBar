@@ -56,6 +56,7 @@ public class ItemUtil {
                     if (enchantment == null)
                         continue;
                     im.addEnchant(enchantment, power, true);
+                    im.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 5, true);
                 }
             }
         }
