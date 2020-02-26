@@ -50,7 +50,7 @@ public class ItemUtil {
             for (String s : enchants) {
                 String enchant = s.split(":")[0];
                 int power = Integer.parseInt(s.split(":")[1]);
-                Enchantment enchantment = EnchantmentWrapper.getByName(enchant);
+                Enchantment enchantment = EnchantmentWrapper.getByName(enchant.toLowerCase());
                 if (enchantment != null)
                     itemStack.addEnchantment(enchantment, power);
             }
