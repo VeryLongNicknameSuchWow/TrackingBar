@@ -54,12 +54,12 @@ public class ItemUtil {
                     String enchant = s.split(":")[0];
                     int power = Integer.parseInt(s.split(":")[1]);
                     Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchant.toLowerCase()));
-                    if (enchantment == null)
-                        continue;
-                    im.addEnchant(enchantment, power, true);
-                    im.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 5, true);
-                    Bukkit.broadcastMessage("Applying enchantments");
+                    if (enchantment != null)
+                        im.addEnchant(enchantment, power, true);
                 }
+                im.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 5, true);
+                Bukkit.broadcastMessage("Applying enchantments");
+                itemStack.setItemMeta(im);
             }
         }
 
