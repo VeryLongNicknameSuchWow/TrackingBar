@@ -50,9 +50,11 @@ public class ItemUtil {
             for (String s : enchants) {
                 String enchant = s.split(":")[0];
                 int power = Integer.parseInt(s.split(":")[1]);
-                Enchantment enchantment = EnchantmentWrapper.getByName(enchant.toLowerCase());
+                Enchantment enchantment = EnchantmentWrapper.getByName(enchant);
                 if (enchantment != null)
                     itemStack.addEnchantment(enchantment, power);
+                else
+                    throw new RuntimeException(enchant + " is not a valid enchant");
             }
         }
 
