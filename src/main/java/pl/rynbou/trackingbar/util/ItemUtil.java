@@ -45,7 +45,6 @@ public class ItemUtil {
             }
         }
 
-        //TODO enchants
         List<String> enchants = itemSection.getStringList("enchants");
         if (!enchants.isEmpty()) {
             ItemMeta im = itemStack.getItemMeta();
