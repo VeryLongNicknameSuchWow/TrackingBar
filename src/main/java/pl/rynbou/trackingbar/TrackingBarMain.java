@@ -4,6 +4,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.rynbou.trackingbar.api.TrackingBarAPI;
 import pl.rynbou.trackingbar.cmds.TrackerCommand;
 import pl.rynbou.trackingbar.listeners.*;
 import pl.rynbou.trackingbar.settings.Settings;
@@ -18,6 +19,7 @@ public class TrackingBarMain extends JavaPlugin {
     private Settings settings;
     private Tracker tracker;
     private MessageUtil messages;
+    private TrackingBarAPI api;
 
     @Override
     public void onEnable() {
@@ -31,6 +33,7 @@ public class TrackingBarMain extends JavaPlugin {
 
         this.tracker = new Tracker(this);
         this.messages = new MessageUtil(this);
+        this.api = new TrackingBarAPI(this);
 
         register("tracker", new TrackerCommand(this));
         register(new PlayerInteractEntityListener(this));
@@ -87,5 +90,9 @@ public class TrackingBarMain extends JavaPlugin {
 
     public MessageUtil getMessages() {
         return messages;
+    }
+
+    public TrackingBarAPI getAPI() {
+        return api;
     }
 }
