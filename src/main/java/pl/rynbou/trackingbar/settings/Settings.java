@@ -258,4 +258,8 @@ public class Settings {
     public MessageLocation getMessageLocation() {
         return messageLocation;
     }
+
+    public boolean isItemEnabled() {
+        return item;
+    }
 }

@@ -30,4 +30,10 @@ public class TrackingBarAPI {
     public void disableTracker(Player player) {
         plugin.getTracker().disable(player);
     }
+
+    public void addTrackerItem(Player player) {
+        if (!plugin.getSettings().isItemEnabled()) return;
+
+        player.getInventory().addItem(plugin.getSettings().getTrackerItem());
+    }
 }
