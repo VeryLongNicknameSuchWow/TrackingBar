@@ -13,26 +13,6 @@ dimension-list:
 # 0 for real time
 tracker-refresh-time: 5
 
-tracker-item:
-  type: CLOCK
-  name: 'PlayerTracker'
-  lore:
-    - 'right click to cycle players'
-    - 'left click to cycle back'
-    - 'right click with shift to toggle'
-    - 'right click other player while sneaking to disable the tracker on them'
-  enchants:
-    - 'DURABILITY:1'
-  craftable: true
-  recipe:
-    shape:
-      - 'AAA'
-      - 'ABA'
-      - 'AAA'
-    ingredients:
-      A: OBSIDIAN
-      B: COMPASS
-
 # ACTIONBAR, CHAT, OFF
 messages-type: ACTIONBAR
 messages:
@@ -44,3 +24,24 @@ messages:
   friend: 'Tracker will no longer work on %player%'
   unfriend: 'Tracker will work on %player% again'
   no-players: 'There are no people in range'
+
+enable-item: true
+tracker-item:
+  type: CLOCK
+  name: 'PlayerTracker'
+  lore:
+    - '- right click to cycle players'
+    - '- left click to track closest player'
+    - '- right click a player while sneaking'
+    - '  to toggle friend status'
+  enchants:
+    - 'DURABILITY:1'
+  craftable: true
+  recipe:
+    shape:
+      - 'AAA'
+      - 'ABA'
+      - 'AAA'
+    ingredients:
+      A: OBSIDIAN
+      B: COMPASS

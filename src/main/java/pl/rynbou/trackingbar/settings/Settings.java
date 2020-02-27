@@ -27,6 +27,7 @@ public class Settings {
     private int trackerRefreshRate;
     private ItemStack trackerItem;
     private boolean craftable;
+    private boolean item;
     private MessageLocation messageLocation;
 
     private ShapedRecipe recipe;
@@ -139,8 +140,8 @@ public class Settings {
             dimensionList.add(world);
         }
 
-        craftable = cfg.getBoolean("tracker-item.craftable");
-        if (!craftable) return true;
+        item = cfg.getBoolean("enable-item");
+        if (!item) return true;
 
         ConfigurationSection trackerSection = cfg.getConfigurationSection("tracker-item");
         if (trackerSection == null) {
@@ -155,6 +156,9 @@ public class Settings {
             e.printStackTrace();
             return false;
         }
+
+        craftable = cfg.getBoolean("tracker-item.craftable");
+        if (!craftable) return true;
 
         List<String> shape = trackerSection.getStringList("recipe.shape");
         recipe = new ShapedRecipe(NamespacedKey.minecraft("tracker"), trackerItem);
