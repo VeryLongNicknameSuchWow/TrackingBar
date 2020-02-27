@@ -190,13 +190,13 @@ public class Tracker {
     }
 
     public void removeUser(Player player) {
+        disable(player);
         User user = getUser(player);
         for (Player p : user.getTrackedBy()) {
             disable(p);
         }
         getUser(user.getTracking()).getTrackedBy().remove(player);
         plugin.getTracker().getUsers().remove(user);
-        disable(player);
     }
 
     public boolean isValidWorld(Player player) {
