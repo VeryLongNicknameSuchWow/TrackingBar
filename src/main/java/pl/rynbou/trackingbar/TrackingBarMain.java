@@ -62,15 +62,6 @@ public class TrackingBarMain extends JavaPlugin {
         } else {
             register(new PlayerMoveListener(this));
         }
-
-        register(new Listener() {
-
-            @EventHandler
-            public void onBreak(BlockBreakEvent event) {
-                tracker.disable(event.getPlayer());
-            }
-
-        });
     }
 
     @Override
