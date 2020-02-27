@@ -18,6 +18,7 @@ public class PlayerInteractListener implements Listener {
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         if (event.getItem() == null) return;
         if (!event.getItem().isSimilar(plugin.getSettings().getTrackerItem())) return;
+        if (event.getPlayer().isSneaking()) return;
 
         if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
             plugin.getTracker().trackClosest(event.getPlayer());
