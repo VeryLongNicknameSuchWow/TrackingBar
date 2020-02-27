@@ -36,13 +36,17 @@ public class TrackingBarMain extends JavaPlugin {
         this.api = new TrackingBarAPI(this);
 
         register("tracker", new TrackerCommand(this));
-        register(new PlayerInteractEntityListener(this));
-        register(new PlayerInteractListener(this));
         register(new PlayerJoinListener(this));
         register(new PlayerKickListener(this));
         register(new PlayerQuitListener(this));
         register(new PlayerRespawnListener(this));
         register(new PlayerTeleportListener(this));
+
+        if (settings.isItemEnabled()) {
+            register(new PlayerInteractEntityListener(this));
+            register(new PlayerInteractListener(this));
+        }
+
 
         int refresh = settings.getTrackerRefreshRate();
         if (refresh > 0) {
