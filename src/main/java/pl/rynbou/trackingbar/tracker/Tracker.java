@@ -27,6 +27,8 @@ public class Tracker {
     }
 
     public void track(Player player, Player toTrack) {
+        if (!isValidWorld(player))
+            return;
 
         User user = getUser(player);
         User newPlayer = getUser(toTrack);
@@ -96,6 +98,9 @@ public class Tracker {
     }
 
     public void cycle(Player player) {
+        if (!isValidWorld(player))
+            return;
+
         User user = getUser(player);
         Player trackedPlayer = user.getTracking();
         List<Player> closest = closestPlayers(player);
@@ -110,6 +115,9 @@ public class Tracker {
     }
 
     public void trackClosest(Player player) {
+        if (!isValidWorld(player))
+            return;
+
         User user = getUser(player);
         List<Player> closest = closestPlayers(player);
         if (closest.size() == 0) {
@@ -188,5 +196,20 @@ public class Tracker {
         }
         getUser(user.getTracking()).getTrackedBy().remove(player);
         plugin.getTracker().getUsers().remove(user);
+    }
+
+    public boolean isValidWorld(Player player) {
+        boolean contains = plugin.getSettings().getDimensionList().contains(player.getWorld());
+
+        switch (plugin.getSettings().getDimensionListType()) {
+            case BLACKLIST:
+                if (contains) plugin.getMessages().sendBlacklistedDimensionMessage(player);
+                return !contains;
+            case WHITELIST:
+                if (!contains) plugin.getMessages().sendBlacklistedDimensionMessage(player);
+                return contains;
+            default:
+                return true;
+        }
     }
 }
