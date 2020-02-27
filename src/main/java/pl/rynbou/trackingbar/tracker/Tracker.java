@@ -196,6 +196,7 @@ public class Tracker {
         }
         getUser(user.getTracking()).getTrackedBy().remove(player);
         plugin.getTracker().getUsers().remove(user);
+        clearBossBar(player);
     }
 
     public boolean isValidWorld(Player player) {
