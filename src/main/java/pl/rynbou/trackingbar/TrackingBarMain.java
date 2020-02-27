@@ -67,7 +67,7 @@ public class TrackingBarMain extends JavaPlugin {
 
             @EventHandler
             public void onBreak(BlockBreakEvent event) {
-                tracker.removeUser(event.getPlayer());
+                tracker.disable(event.getPlayer());
             }
 
         });
