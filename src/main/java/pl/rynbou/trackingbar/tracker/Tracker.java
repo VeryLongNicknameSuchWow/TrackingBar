@@ -160,6 +160,7 @@ public class Tracker {
     public void disable(Player player) {
         User user = getUser(player);
         plugin.getMessages().sendToggleOffMessage(player);
+        getUser(user.getTracking()).getTrackedBy().remove(player);
         user.setTracking(null);
         clearBossBar(player);
     }
