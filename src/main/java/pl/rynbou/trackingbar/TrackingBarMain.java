@@ -41,6 +41,7 @@ public class TrackingBarMain extends JavaPlugin {
         register(new PlayerQuitListener(this));
         register(new PlayerRespawnListener(this));
         register(new PlayerTeleportListener(this));
+        register(new PlayerChangedWorldListener(this));
 
         if (settings.isItemEnabled()) {
             register(new PlayerInteractEntityListener(this));
