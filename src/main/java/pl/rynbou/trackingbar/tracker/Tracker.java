@@ -47,6 +47,7 @@ public class Tracker {
 
         user.setTracking(toTrack);
         newPlayer.getTrackedBy().add(player);
+        refresh(player);
     }
 
     public void refresh(Player player) {
@@ -91,6 +92,7 @@ public class Tracker {
         } else {
             getUser(player).getFriends().add(friend);
             plugin.getMessages().sendFriendMessage(player, friend);
+            trackClosest(player);
         }
     }
 
