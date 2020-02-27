@@ -17,5 +17,6 @@ public class PlayerPortalListener implements Listener {
     @EventHandler
     public void onPlayerPortalEvent(PlayerPortalEvent event) {
         plugin.getTracker().removeUser(event.getPlayer());
+        plugin.getTracker().clearBossBar(event.getPlayer());
     }
 }
