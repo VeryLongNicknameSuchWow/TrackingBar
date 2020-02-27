@@ -2,7 +2,9 @@ package pl.rynbou.trackingbar;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.rynbou.trackingbar.api.TrackingBarAPI;
 import pl.rynbou.trackingbar.cmds.TrackerCommand;
@@ -60,6 +62,15 @@ public class TrackingBarMain extends JavaPlugin {
         } else {
             register(new PlayerMoveListener(this));
         }
+
+        register(new Listener() {
+
+            @EventHandler
+            public void onBreak(BlockBreakEvent event) {
+                tracker.removeUser(event.getPlayer());
+            }
+
+        });
     }
 
     @Override
