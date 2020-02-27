@@ -2,6 +2,7 @@ package pl.rynbou.trackingbar.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -15,7 +16,7 @@ public class PlayerInteractEntityListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent event) {
         if (event.getHand() == EquipmentSlot.OFF_HAND) return;
         if (!event.getPlayer().getInventory().getItemInMainHand().isSimilar(plugin.getSettings().getTrackerItem()))
