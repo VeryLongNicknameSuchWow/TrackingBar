@@ -92,7 +92,6 @@ public class Tracker {
         } else {
             getUser(player).getFriends().add(friend);
             plugin.getMessages().sendFriendMessage(player, friend);
-            trackClosest(player);
         }
     }
 
