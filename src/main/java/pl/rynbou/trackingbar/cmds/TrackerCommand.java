@@ -23,7 +23,6 @@ public class TrackerCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        player.getInventory().addItem(plugin.getSettings().getTrackerItem());
 
         if (args.length == 0) {
             sendHelp(player);
