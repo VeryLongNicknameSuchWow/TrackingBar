@@ -22,6 +22,9 @@ public class TrackerCommand implements CommandExecutor {
             return true;
         }
 
+        if (!sender.hasPermission("trackingbar.user"))
+            return true;
+
         Player player = (Player) sender;
 
         if (args.length == 0) {
