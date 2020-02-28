@@ -9,7 +9,7 @@ import pl.rynbou.trackingbar.TrackingBarMain;
 
 public class TrackerCommand implements CommandExecutor {
 
-    TrackingBarMain plugin;
+    private TrackingBarMain plugin;
 
     public TrackerCommand(TrackingBarMain plugin) {
         this.plugin = plugin;
