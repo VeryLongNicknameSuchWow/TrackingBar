@@ -214,4 +214,8 @@ public class Tracker {
                 return true;
         }
     }
+
+    public Map<Player, User> debugUsers() {
+        return users;
+    }
 }
