@@ -215,7 +215,7 @@ public class Tracker {
         }
     }
 
-    public Map<Player, User> debugUsers() {
-        return users;
+    public void debug() {
+        return;
     }
 }

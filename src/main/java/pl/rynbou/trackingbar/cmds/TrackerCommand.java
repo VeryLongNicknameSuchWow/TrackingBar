@@ -6,9 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.rynbou.trackingbar.TrackingBarMain;
-import pl.rynbou.trackingbar.user.User;
-
-import java.util.Map;
 
 public class TrackerCommand implements CommandExecutor {
 
@@ -47,7 +44,7 @@ public class TrackerCommand implements CommandExecutor {
                     player.sendMessage("Correct usage: /tracker friend <nickname>");
                     return true;
                 case "debug":
-                    Map<Player, User> users = plugin.getTracker().debugUsers();
+                    plugin.getTracker().debug();
                     return true;
                 default:
                     player.sendMessage("Incorrect argument \"" + args[0] + "\"");
