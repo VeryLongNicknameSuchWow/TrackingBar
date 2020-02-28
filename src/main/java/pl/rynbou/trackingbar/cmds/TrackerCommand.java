@@ -46,9 +46,9 @@ public class TrackerCommand implements CommandExecutor {
                 case "friend":
                     player.sendMessage("Correct usage: /tracker friend <nickname>");
                     return true;
-                case "debug":
-                    plugin.getTracker().debug();
-                    return true;
+//                case "debug":
+//                    plugin.getTracker().debug();
+//                    return true;
                 default:
                     player.sendMessage("Incorrect argument \"" + args[0] + "\"");
                     sendHelp(player);
