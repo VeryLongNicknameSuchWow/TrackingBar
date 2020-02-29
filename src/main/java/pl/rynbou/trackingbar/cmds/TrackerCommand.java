@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.rynbou.trackingbar.TrackingBarMain;
+import pl.rynbou.trackingbar.util.PermissionUtil;
 
 public class TrackerCommand implements CommandExecutor {
 
@@ -32,23 +33,23 @@ public class TrackerCommand implements CommandExecutor {
         if (args.length == 1) {
             switch (args[0]) {
                 case "next":
-                    if (!hasPermission(player, "user")) return true;
+                    if (!PermissionUtil.hasPermission(player, "user")) return true;
                     plugin.getTracker().cycle(player);
                     return true;
                 case "nearest":
-                    if (!hasPermission(player, "user")) return true;
+                    if (!PermissionUtil.hasPermission(player, "user")) return true;
                     plugin.getTracker().trackClosest(player);
                     return true;
                 case "disable":
-                    if (!hasPermission(player, "user")) return true;
+                    if (!PermissionUtil.hasPermission(player, "user")) return true;
                     plugin.getTracker().disable(player);
                     return true;
                 case "friend":
-                    if (!hasPermission(player, "user")) return true;
+                    if (!PermissionUtil.hasPermission(player, "user")) return true;
                     player.sendMessage("Correct usage: /tracker friend <nickname>");
                     return true;
                 case "give":
-                    if (!hasPermission(player, "give")) return true;
+                    if (!PermissionUtil.hasPermission(player, "give")) return true;
                     player.sendMessage("Correct usage: /tracker give <nickname>");
                     return true;
 //                case "debug":
@@ -71,11 +72,11 @@ public class TrackerCommand implements CommandExecutor {
 
             switch (args[0]) {
                 case "friend":
-                    if (!hasPermission(player, "user")) return true;
+                    if (!PermissionUtil.hasPermission(player, "user")) return true;
                     plugin.getTracker().toggleFriend(player, arg);
                     return true;
                 case "give":
-                    if (!hasPermission(player, "give")) return true;
+                    if (!PermissionUtil.hasPermission(player, "give")) return true;
                     arg.getInventory().addItem(plugin.getSettings().getTrackerItem());
                     return true;
                 default:
@@ -95,14 +96,5 @@ public class TrackerCommand implements CommandExecutor {
         player.sendMessage("/tracker disable - Disable tracker");
         player.sendMessage("/tracker friend  - Toggle friendship status");
         player.sendMessage("/tracker give    - Give tracker item to player");
-    }
-
-    public boolean hasPermission(Player player, String permission) {
-        if (player.hasPermission("trackingbar." + permission))
-            return true;
-        else {
-            player.sendMessage("You don't have permission");
-            return false;
-        }
     }
 }

@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import pl.rynbou.trackingbar.TrackingBarMain;
+import pl.rynbou.trackingbar.util.PermissionUtil;
 
 public class PlayerInteractEntityListener implements Listener {
 
@@ -22,6 +23,7 @@ public class PlayerInteractEntityListener implements Listener {
             return;
         if (!event.getPlayer().isSneaking()) return;
         if (!(event.getRightClicked() instanceof Player)) return;
+        if (!(PermissionUtil.hasPermission(event.getPlayer(), "item"))) return;
 
         Player friend = (Player) event.getRightClicked();
         plugin.getTracker().toggleFriend(event.getPlayer(), friend);

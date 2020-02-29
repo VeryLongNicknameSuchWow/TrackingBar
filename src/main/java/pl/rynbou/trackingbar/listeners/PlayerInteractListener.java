@@ -5,6 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import pl.rynbou.trackingbar.TrackingBarMain;
+import pl.rynbou.trackingbar.util.PermissionUtil;
 
 public class PlayerInteractListener implements Listener {
 
@@ -19,6 +20,7 @@ public class PlayerInteractListener implements Listener {
         if (event.getItem() == null) return;
         if (!event.getItem().isSimilar(plugin.getSettings().getTrackerItem())) return;
         if (event.getPlayer().isSneaking()) return;
+        if (!(PermissionUtil.hasPermission(event.getPlayer(), "item"))) return;
 
         if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
             plugin.getTracker().trackClosest(event.getPlayer());
