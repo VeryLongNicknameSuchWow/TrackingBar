@@ -1,5 +1,6 @@
 package pl.rynbou.trackingbar;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.EventHandler;
@@ -32,6 +33,8 @@ public class TrackingBarMain extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
+        Metrics metrics = new Metrics(this, 6637);
 
         this.tracker = new Tracker(this);
         this.messages = new MessageUtil(this);
