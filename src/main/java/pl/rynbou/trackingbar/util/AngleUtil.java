@@ -28,7 +28,7 @@ public class AngleUtil {
         } else if (angle > Math.PI / 2) {
             return "<                                             ";
         } else {
-            int space = (int) map(angle, -Math.PI, Math.PI, -63, 63);
+            int space = (int) map(angle, -Math.PI, Math.PI, -73, 73);
 
             StringBuilder s = new StringBuilder();
 

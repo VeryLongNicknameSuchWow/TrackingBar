@@ -9,7 +9,7 @@ import pl.rynbou.trackingbar.TrackingBarMain;
 
 public class TrackerCommand implements CommandExecutor {
 
-    TrackingBarMain plugin;
+    private TrackingBarMain plugin;
 
     public TrackerCommand(TrackingBarMain plugin) {
         this.plugin = plugin;
@@ -21,6 +21,9 @@ public class TrackerCommand implements CommandExecutor {
             sender.sendMessage("You must be a player");
             return true;
         }
+
+        if (!sender.hasPermission("trackingbar.user"))
+            return true;
 
         Player player = (Player) sender;
 
@@ -43,6 +46,9 @@ public class TrackerCommand implements CommandExecutor {
                 case "friend":
                     player.sendMessage("Correct usage: /tracker friend <nickname>");
                     return true;
+//                case "debug":
+//                    plugin.getTracker().debug();
+//                    return true;
                 default:
                     player.sendMessage("Incorrect argument \"" + args[0] + "\"");
                     sendHelp(player);
