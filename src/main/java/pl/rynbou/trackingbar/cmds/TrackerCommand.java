@@ -98,7 +98,11 @@ public class TrackerCommand implements CommandExecutor {
     }
 
     public boolean hasPermission(Player player, String permission) {
-        player.sendMessage("You don't have permission");
-        return player.hasPermission("trackingbar." + permission);
+        if (player.hasPermission("trackingbar." + permission))
+            return true;
+        else {
+            player.sendMessage("You don't have permission");
+            return false;
+        }
     }
 }
