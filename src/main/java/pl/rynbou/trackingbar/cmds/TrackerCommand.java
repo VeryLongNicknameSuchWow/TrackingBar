@@ -22,9 +22,6 @@ public class TrackerCommand implements CommandExecutor {
             return true;
         }
 
-        if (!sender.hasPermission("trackingbar.user"))
-            return true;
-
         Player player = (Player) sender;
 
         if (args.length == 0) {
@@ -35,16 +32,24 @@ public class TrackerCommand implements CommandExecutor {
         if (args.length == 1) {
             switch (args[0]) {
                 case "next":
+                    if (!hasPermission(player, "user")) return true;
                     plugin.getTracker().cycle(player);
                     return true;
                 case "nearest":
+                    if (!hasPermission(player, "user")) return true;
                     plugin.getTracker().trackClosest(player);
                     return true;
                 case "disable":
+                    if (!hasPermission(player, "user")) return true;
                     plugin.getTracker().disable(player);
                     return true;
                 case "friend":
+                    if (!hasPermission(player, "user")) return true;
                     player.sendMessage("Correct usage: /tracker friend <nickname>");
+                    return true;
+                case "give":
+                    if (!hasPermission(player, "give")) return true;
+                    player.sendMessage("Correct usage: /tracker give <nickname>");
                     return true;
 //                case "debug":
 //                    plugin.getTracker().debug();
@@ -57,14 +62,21 @@ public class TrackerCommand implements CommandExecutor {
         }
 
         if (args.length == 2) {
+            Player arg = Bukkit.getPlayer(args[1]);
+
+            if (arg == null) {
+                player.sendMessage("That player is not online!");
+                return true;
+            }
+
             switch (args[0]) {
                 case "friend":
-                    Player friend = Bukkit.getPlayer(args[1]);
-                    if (friend == null) {
-                        player.sendMessage("That player is not online!");
-                        return true;
-                    }
-                    plugin.getTracker().toggleFriend(player, friend);
+                    if (!hasPermission(player, "user")) return true;
+                    plugin.getTracker().toggleFriend(player, arg);
+                    return true;
+                case "give":
+                    if (!hasPermission(player, "give")) return true;
+                    arg.getInventory().addItem(plugin.getSettings().getTrackerItem());
                     return true;
                 default:
                     sendHelp(player);
@@ -82,5 +94,11 @@ public class TrackerCommand implements CommandExecutor {
         player.sendMessage("/tracker nearest - Start tracking the nearest player");
         player.sendMessage("/tracker disable - Disable tracker");
         player.sendMessage("/tracker friend  - Toggle friendship status");
+        player.sendMessage("/tracker give    - Give tracker item to player");
+    }
+
+    public boolean hasPermission(Player player, String permission) {
+        player.sendMessage("You don't have permission");
+        return player.hasPermission("trackingbar." + permission);
     }
 }
